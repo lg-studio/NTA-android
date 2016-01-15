@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <common.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/Forgot_password_"
+        android:textSize="21sp"
+        android:layout_marginTop="36dp"
+        android:textColor="@color/black_87"
+        app:fontName="@string/roboto_regular"
+        />
+
+    <common.views.FontTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/password_recovery_massage"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:textSize="14sp"
+        app:fontName="@string/roboto_regular"
+        android:textColor="@color/black_57"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/password_recovery_enter_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/Email"
+        android:textColor="@color/black_87"
+        android:singleLine="true"
+        />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="21dp"
+        >
+
+    <common.views.FontButton
+        android:id="@+id/password_recovery_send_btn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/orange_dark"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:text="@string/SEND"
+        android:paddingLeft="48dp"
+        android:paddingRight="48dp"
+        />
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

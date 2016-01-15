@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@android:color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <common.views.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/total_progress"
+                android:textColor="@color/black_57"
+                android:textSize="16sp"
+                app:fontName="@string/roboto_light" />
+
+            <common.views.FontTextView
+                android:id="@+id/statistic_total_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:text="44%"
+                android:textColor="@color/black_87"
+                android:textSize="16sp"
+                app:fontName="@string/roboto_light"
+
+                />
+
+            <ProgressBar
+                android:id="@+id/statistic_total_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:layout_below="@+id/statistic_total_progress"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/orange_progress_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/statistic_total_progress_bar"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:weightSum="2">
+
+                <common.views.FontTextView
+                    android:id="@+id/statistic_episode_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="episode 4"
+                    android:textColor="@color/black_57"
+                    android:textSize="12sp"
+                    app:fontName="@string/roboto_light" />
+
+                <common.views.FontTextView
+                    android:id="@+id/statistic_scene_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="scene 4"
+                    android:textColor="@color/black_57"
+                    android:textSize="12sp"
+                    app:fontName="@string/roboto_light" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <common.views.FontTextView
+                        style="@style/ProfileStatisticNumbers"
+                        android:text="5 of 45" />
+
+                    <common.views.FontTextView
+                        style="@style/ProfileStatisticText"
+                        android:text="Bonus mission" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <common.views.FontTextView
+                        style="@style/ProfileStatisticNumbers"
+                        android:text="12 of 56" />
+
+                    <common.views.FontTextView
+                        style="@style/ProfileStatisticText"
+                        android:text="Secrets found" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <common.views.FontTextView
+                        style="@style/ProfileStatisticNumbers"
+                        android:text="5 of 45" />
+
+                    <common.views.FontTextView
+                        style="@style/ProfileStatisticText"
+                        android:text="Words add" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp">
+
+                <common.views.FontTextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="@string/voice_recognition_power"
+                    android:textColor="@color/black_57"
+                    android:textSize="16sp"
+                    app:fontName="@string/roboto_regular" />
+
+                <common.views.FontTextView
+                    android:id="@+id/statistic_voice_recognition_power"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="90%"
+                    android:textColor="@color/black_87"
+                    android:textSize="20sp"
+                    app:fontName="@string/roboto_light" />
+
+            </RelativeLayout>
+
+
+            <ProgressBar
+                android:id="@+id/statistic_voice_recognition_progress"
+                android:layout_width="match_parent"
+                android:layout_height="13dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/progress_red" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/iv_title"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:src="@mipmap/ic_mode_rating"/>
+
+    <common.views.FontTextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_title"
+        android:layout_marginTop="54dp"
+        android:gravity="center"
+        android:text="@string/Select_the_rating_mode"
+        android:textColor="@color/blue_87"
+        android:textSize="24dp"
+        app:fontName="roboto-light.ttf"/>
+
+    <LinearLayout
+        android:id="@+id/lt_actions"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="42dp"
+        android:layout_below="@+id/tv_title"
+        android:background="#dddddd"
+        android:orientation="horizontal"
+        android:padding="1px"
+        android:weightSum="2">
+
+        <common.views.FontTextView
+            android:id="@+id/tv_recognize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="1px"
+            android:layout_weight="1"
+            android:paddingBottom="10dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="@string/BY_VOICE_RECOGNITION"
+            android:textColor="@color/black_54"
+            android:textSize="18dp"
+            android:drawableBottom="@mipmap/ic_mic_black_48_px_copy_3"
+            app:fontName="roboto-regular.ttf"/>
+
+        <common.views.FontTextView
+            android:id="@+id/tv_tutor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:drawableBottom="@mipmap/ic_school_black_48_px"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="@string/BY_TUTOR_FEEDBACK"
+            android:textColor="@color/black_54"
+            android:textSize="18dp"
+            app:fontName="roboto-regular.ttf"/>
+    </LinearLayout>
+
+</RelativeLayout>

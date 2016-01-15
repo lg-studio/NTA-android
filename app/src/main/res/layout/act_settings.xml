@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <include
+        android:id="@+id/settings_toolbar"
+        layout="@layout/incl_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        >
+        
+<ImageView
+    android:id="@+id/feedback_image"
+    android:layout_width="24dp"
+    android:layout_height="24dp"
+    android:layout_marginLeft="16dp"
+    android:layout_centerVertical="true"
+    android:src="@mipmap/ic_notifications_none_black"
+
+    />
+        <common.views.FontTextView
+            android:id="@+id/semester_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@+id/feedback_image"
+            android:layout_centerVertical="true"
+            android:textSize="20dp"
+            android:text="@string/push_reminders"
+            app:fontName="@string/roboto_regular"
+
+            />
+
+        <CheckBox
+            android:id="@+id/settings_enable_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_centerVertical="true"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/dim_foreground_material_dark"
+        >
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/send_feedback_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp">
+
+        <ImageView
+            android:id="@+id/send_feedback_image"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_send_feedback"
+            />
+
+        <common.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@+id/send_feedback_image"
+            android:layout_centerVertical="true"
+            android:textSize="20dp"
+            android:text="@string/send_feedback"
+            app:fontName="@string/roboto_regular"
+
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/version"
+        android:visibility="gone"
+        android:textColor="@color/green"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:text="1.0000000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

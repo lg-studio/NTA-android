@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="200dp"
+              android:layout_height="50dp"
+              android:padding="10dp"
+              android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        >
+
+        <common.views.FontTextView
+            android:id="@+id/tv_popup_title"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:textSize="16dp"
+            android:layout_toLeftOf="@+id/tv_popup_subtitle"
+            android:layout_toStartOf="@+id/tv_popup_subtitle"
+            android:ellipsize="end"
+            android:gravity="center_vertical|left"
+            android:maxLines="1"
+            android:text="dasdasdasd"
+            android:textColor="@android:color/black"
+            app:fontName="roboto-regular.ttf"/>
+
+        <common.views.FontTextView
+            android:id="@+id/tv_popup_subtitle"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical|right"
+            android:text="88"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16dp"
+            android:visibility="invisible"
+            app:fontName="roboto-regular.ttf"
+            android:layout_width="wrap_content"/>
+    </RelativeLayout>
+</LinearLayout>

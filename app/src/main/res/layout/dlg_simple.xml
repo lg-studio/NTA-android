@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="250dp"
+                                    android:layout_height="wrap_content"
+                                    app:cardCornerRadius="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+
+            >
+
+            <common.views.FontTextView
+                android:id="@+id/dlg_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="18dp"
+                android:maxLines="1"
+                android:text="Exit From this task?"
+                android:textColor="@android:color/black"
+                android:textSize="18dp"
+                app:fontName="roboto-medium.ttf"/>
+
+
+            <common.views.FontTextView
+                android:id="@+id/dlg_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/dlg_title"
+                android:layout_alignStart="@+id/dlg_title"
+                android:layout_below="@+id/dlg_title"
+                android:layout_marginRight="25dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Exit From this task?\n kdsjfkldsjf\n"
+                android:textColor="@android:color/black"
+                android:textSize="14dp"
+                app:fontName="roboto-regular.ttf"/>
+
+            <common.views.FontTextView
+                android:id="@+id/dlg_agree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/dlg_message"
+                android:layout_marginRight="25dp"
+                android:paddingTop="30dp"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:text="@string/AGREE"
+                android:textColor="@android:color/black"
+                android:textSize="13dp"
+                app:fontName="roboto-regular.ttf"
+                />
+
+            <common.views.FontTextView
+                android:id="@+id/dlg_disagree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dlg_message"
+                android:layout_marginRight="22dp"
+                android:paddingTop="30dp"
+                android:layout_toLeftOf="@+id/dlg_agree"
+                android:clickable="true"
+                android:ellipsize="end"
+                android:text="@string/DISAGREE"
+                android:textColor="@color/dlg_disagree"
+                android:textSize="13dp"
+                app:fontName="roboto-regular.ttf"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/dlg_agree"/>
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

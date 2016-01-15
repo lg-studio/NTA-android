@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="320dp"
+                android:layout_height="240dp"
+                android:background="@android:color/white">
+
+    <common.views.FontTextView
+        android:id="@+id/record_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/frm_record"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="29dp"
+        android:text="@string/STOP_TO_FINISH_RECORDING"
+        android:textColor="@color/black_54"
+        android:textSize="22dp"
+        app:fontName="roboto-light.ttf"/>
+
+    <FrameLayout
+        android:id="@+id/frm_record"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true">
+
+        <com.pnikosis.materialishprogress.ProgressWheel
+            android:id="@+id/progress_wheel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:matProg_barColor="#388E3C"
+            app:matProg_barWidth="5dp"
+            app:matProg_circleRadius="80dp"
+            app:matProg_fillRadius="false"
+            app:matProg_linearProgress="true"
+            app:matProg_spinSpeed="0.07"/>
+
+        <ImageView
+            android:id="@+id/record_mic"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_mic_play"
+            android:visibility="visible"/>
+    </FrameLayout>
+
+    <common.views.FontTextView
+        android:id="@+id/record_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frm_record"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="20dp"
+        android:text="0:25"
+        android:textColor="@color/black_87"
+        android:textSize="22dp"
+        app:fontName="roboto-light.ttf"/>
+
+</RelativeLayout>

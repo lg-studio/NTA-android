@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/exercise_chat_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+
+   <!-- <Button
+        android:id="@+id/btn_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:inflatedId="@+id/message_layout"
+        android:text="HELLO"
+        />-->
+
+    <ListView
+        android:id="@+id/exercise_chat_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/lt_answer"
+        android:cacheColorHint="@android:color/white"
+        android:divider="@null"
+        >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/lt_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/lt_selected_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+            <common.views.FontTextView
+                android:id="@+id/choose_answer_mic"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:alpha="0.87"
+                android:background="@null"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="@string/Choose_your_answer"
+                android:textSize="13dp"
+                app:fontName="roboto-regular.ttf"/>
+            <common.views.FontTextView
+                android:id="@+id/selected_variant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_below="@+id/choose_answer_mic"
+                android:paddingTop="37dp"
+                android:paddingBottom="37dp"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"
+                android:alpha="0.87"
+                android:gravity="center"
+                android:background="#FFE1AF"
+                app:fontName="roboto-regular.ttf"/>
+
+            <ImageView
+                android:layout_below="@+id/choose_answer_mic"
+                android:id="@+id/mic"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="-28dp"
+                android:src="@mipmap/ic_mic"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lt_variants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            >
+            <common.views.FontTextView
+                android:id="@+id/choose_answer_variants"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:background="@null"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:textColor="@color/black_87"
+                android:text="@string/Choose_your_answer"
+                android:textSize="13dp"
+                app:fontName="@string/roboto_regular"/>
+
+            <common.views.FontTextView
+                android:id="@+id/variant0"
+                android:tag="variant0"
+                style="@style/AnswerVariantView"
+                app:fontName="roboto-regular.ttf"
+                 />
+
+            <common.views.FontTextView
+                android:id="@+id/variant1"
+                android:tag="variant1"
+                style="@style/AnswerVariantView"
+                app:fontName="@string/roboto_regular"
+
+                />
+
+            <common.views.FontTextView
+                android:id="@+id/variant2"
+                android:tag="variant2"
+                style="@style/AnswerVariantView"
+                app:fontName="@string/roboto_regular"
+                 />
+
+            <common.views.FontTextView
+                android:id="@+id/variant3"
+                android:tag="variant3"
+                style="@style/AnswerVariantView"
+                app:fontName="@string/roboto_regular"
+                 />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <common.views.FontTextView
+        android:id="@+id/student_massage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/student_word"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black_87"
+        android:textSize="16dp"
+        android:padding="8dp"
+        app:fontName="@string/roboto_regular"
+        />
+
+</RelativeLayout>

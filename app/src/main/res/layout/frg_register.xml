@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:backgroundTint="@color/bg_account"
+              android:backgroundTintMode="src_in"
+              android:baselineAligned="false"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        style="@style/ItemAccountCardView"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="6dp">
+
+        <common.views.FontEditView
+            android:id="@+id/et_firstname"
+            style="@style/ItemAccountEditView"
+            android:hint="@string/First_name"
+            app:fontName="roboto-regular.ttf"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        style="@style/ItemAccountCardView"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="6dp">
+
+        <common.views.FontEditView
+            android:id="@+id/et_lastname"
+            style="@style/ItemAccountEditView"
+            android:hint="@string/Last_name"
+            app:fontName="roboto-regular.ttf"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        style="@style/ItemAccountCardView"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="6dp">
+
+        <common.views.FontEditView
+            android:id="@+id/et_email"
+            style="@style/ItemAccountEditView"
+            android:hint="@string/Email"
+            android:inputType="textEmailAddress"
+            app:fontName="roboto-regular.ttf"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        style="@style/ItemAccountCardView"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="6dp">
+
+        <common.views.FontEditView
+            android:id="@+id/et_passwd"
+            style="@style/ItemAccountEditView"
+            android:hint="@string/Password"
+            android:inputType="textPassword"
+            app:fontName="roboto-regular.ttf"/>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        style="@style/ItemAccountCardView"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="6dp">
+
+        <common.views.FontEditView
+            android:id="@+id/et_confirm_passwd"
+            style="@style/ItemAccountEditView"
+            android:hint="@string/Confirm_password"
+            android:inputType="textPassword"
+            app:fontName="roboto-regular.ttf"/>
+
+    </android.support.v7.widget.CardView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <common.views.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center_vertical|left"
+            android:text="@string/Teacher_code"
+            app:fontName="roboto-regular.ttf"
+            android:textColor="#827f80"
+            />
+
+        <android.support.v7.widget.CardView
+            style="@style/ItemAccountCardView"
+            app:cardCornerRadius="6dp">
+
+            <common.views.FontEditView
+                android:id="@+id/et_teachercode"
+                style="@style/ItemAccountEditView"
+                android:inputType="numberPassword"/>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="6dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <common.views.FontButton
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_account"
+                android:paddingBottom="10dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="10dp"
+                android:text="@string/Register"
+                app:fontName="roboto-bold.ttf"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

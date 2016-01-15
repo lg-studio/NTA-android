@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      >
+    <item
+        android:id="@+id/action_scenes_tasks"
+        android:icon="@mipmap/ic_menu_tasks"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_map"
+        android:icon="@mipmap/ic_menu_map"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_info"
+        android:icon="@mipmap/ic_menu_info"
+        app:showAsAction="always"/>
+</menu>

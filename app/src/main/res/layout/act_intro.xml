@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+<common.views.SmoothScrollViewPager
+    android:id="@+id/sm_view_pager"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/intro_title"
+    android:layout_marginBottom="32dp"
+    />
+
+    <common.views.FontTextView
+        android:id="@+id/intro_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Arriving in New York"
+        android:textSize="20dp"
+        android:gravity="center"
+        app:fontName="@string/roboto_regular"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@+id/intro_description"
+        android:layout_centerHorizontal="true"/>
+
+    <common.views.FontTextView
+        android:id="@+id/intro_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Welcome to New York"
+        android:textSize="16dp"
+        android:gravity="center"
+        app:fontName="@string/roboto_regular"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_above="@+id/lets_start_btn"
+        android:layout_centerHorizontal="true"/>
+
+
+    <Button
+        android:id="@+id/lets_start_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/lets_start"
+        android:textColor="@android:color/white"
+        android:background="@color/orange"
+        android:textSize="@dimen/intro_btn_continue_txtsize"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp"
+        android:layout_marginLeft="8dp"
+
+        />
+
+</RelativeLayout>

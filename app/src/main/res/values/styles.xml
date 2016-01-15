@@ -1,0 +1,83 @@
+<resources >
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+
+
+
+    <style name="MainToolbarItem">
+        <item name="android:layout_marginLeft">1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:gravity">center</item>
+
+
+    </style>
+
+    <style name="MapToolbar" parent = "MainToolbarItem">
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@color/bg_toolbar</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:clickable">true</item>
+        <item name="android:longClickable">false</item>
+    </style>
+
+    <style name="SimpleToolbar" parent = "MainToolbarItem">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+
+    <style name="ItemAccountCardView">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ItemAccountEditView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="AnswerVariantView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">#FFE1AF</item>
+        <item name="android:alpha">0.87</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+<style name="ProfileStatisticNumbers">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/black_87</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+<style name="ProfileStatisticText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/black_57</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+</resources>

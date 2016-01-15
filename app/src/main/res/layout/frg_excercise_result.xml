@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+    android:fadeScrollbars="false"
+    android:fillViewport="true">
+<LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#eaeaea"
+              android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:background="@null">
+
+        <common.views.FontTextView
+            android:id="@+id/title_mark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="22dp"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="@string/Task_completed"
+            android:background="@null"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/black_54"
+            android:textSize="26dp"
+            app:fontName="roboto-medium.ttf"/>
+
+        <ImageView
+            android:id="@+id/iv_result"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_below="@+id/title_mark"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-68dp"
+            android:background="@null"
+            android:elevation="7px"
+            android:src="@mipmap/ic_exercise_result"
+            />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_result"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="6px">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+                    <View
+                        android:id="@+id/stub"
+                        android:layout_width="match_parent"
+                        android:layout_height="83dp"/>
+
+                    <common.views.FontTextView
+                        android:id="@+id/text_mark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:text="WELL DONE!"
+                        android:textColor="@color/red_54"
+                        android:textSize="32dp"
+                        app:fontName="robotoslab-bold.ttf"/>
+
+                    <common.views.FontTextView
+                        android:id="@+id/percents_mark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:gravity="center"
+                        android:text="89%"
+                        android:textColor="@color/black_89"
+                        android:textSize="64dp"
+                        app:fontName="roboto-medium.ttf"/>
+                    <common.views.FontTextView
+                        android:id="@+id/send_to_teacher"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="27dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="#20000000"
+                        android:text="@string/Send_this_task_to_tutor_review"
+                        android:textColor="@color/red_dark_100"
+                        android:textSize="27dp"
+                        app:fontName="robotoslab-regular.ttf"/>
+                    <LinearLayout
+                        android:id="@+id/lt_actions"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#dddddd"
+                        android:orientation="horizontal"
+                        android:padding="1px"
+                        android:weightSum="2">
+
+                        <common.views.FontTextView
+                            android:id="@+id/back_to_scene"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="1px"
+                            android:layout_weight="1"
+                            android:background="@android:color/white"
+                            android:gravity="center"
+                            android:text="@string/BACK_TO_SCENE"
+                            android:textColor="@color/black_54"
+                            android:textSize="18dp"
+                            app:fontName="roboto-regular.ttf"/>
+
+                        <common.views.FontTextView
+                            android:id="@+id/try_again"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:background="@android:color/white"
+                            android:gravity="center"
+                            android:text="@string/TRY_AGAIN"
+                            android:textColor="@color/black_54"
+                            android:textSize="18dp"
+                            app:fontName="roboto-regular.ttf"/>
+                    </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_next_task"
+            android:layout_below="@+id/card_result"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="9dp"
+            app:cardCornerRadius="6px"
+            android:elevation="6px">
+
+            <common.views.FontButton
+                android:id="@+id/next_task"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/orange"
+                android:gravity="center"
+                android:text="@string/NEXT_TASK"
+                android:textColor="@android:color/white"
+                android:textSize="22dp"
+                app:fontName="roboto-regular.ttf"
+                />
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+</LinearLayout>
+</ScrollView>

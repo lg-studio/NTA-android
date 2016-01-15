@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <common.views.FontTextView
+        android:id="@+id/feedback_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/How_we_are_doing"
+        android:textColor="@color/black_87"
+        android:textSize="21dp"
+        app:fontName="roboto-medium.ttf"/>
+
+    <common.views.FontTextView
+        android:id="@+id/feedback_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feedback_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/Please_tell_us_what"
+        android:textColor="@color/black_54"
+        android:textSize="21dp"
+        app:fontName="roboto-medium.ttf"/>
+
+    <common.views.FontEditView
+        android:id="@+id/feedback_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feedback_description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:hint="@string/Subject"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/black_87"
+        android:textSize="14dp"
+        app:fontName="roboto-thin.ttf"/>
+
+    <common.views.FontEditView
+        android:id="@+id/feedback_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/card_feedback_send"
+        android:layout_below="@+id/feedback_theme"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="15dp"
+        android:gravity="left|top"
+        android:hint="@string/Email"
+        android:textColor="@color/black_87"
+        android:textSize="14dp"
+        app:fontName="roboto-thin.ttf"/>
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_feedback_send"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/bottom_stub"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="9dp"
+        android:elevation="6px"
+        app:cardCornerRadius="6px">
+
+        <common.views.FontButton
+            android:id="@+id/feedback_send"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:text="@string/SEND"
+            android:textColor="@android:color/white"
+            android:textSize="22dp"
+            app:fontName="roboto-regular.ttf"
+            />
+    </android.support.v7.widget.CardView>
+    <View
+        android:id="@+id/bottom_stub"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="20dp" />
+
+</RelativeLayout>

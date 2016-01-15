@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_intro_btn_continue">#B6D7A8</color>
+    <color name="bg_toolbar">#005F92</color>
+    <color name="orange">#f09c20</color>
+    <color name="bg_account">#f1f1f1</color>
+    <color name="bg_toolbar_account">#5e7ab8</color>
+    <color name="dlg_disagree">#F09C20</color>
+    <color name="orange_lite">#40f1a536</color>
+    <color name="white">#ffffff</color>
+    <color name="white_54">#85ffffff</color>
+    <color name="black_87">#bd000000</color>
+    <color name="black_57">#86000000</color>
+    <color name="orange_dark">#f1a536</color>
+    <color name="orange_progress_background">#5cf09c1f</color>
+    <color name="progress_red">#d04d02</color>
+    <color name="black_54">#8a000000</color>
+    <color name="black_89">#e3000000</color>
+    <color name="red_54">#f51313</color>
+    <color name="red_dark_100">#b85b5b</color>
+    <color name="green">#47b832</color>
+    <color name="blue_87">#DE3375B8</color>
+    <color name="pink">#f97f7f</color>
+    <color name="orange_49">#80f1a536</color>
+</resources>

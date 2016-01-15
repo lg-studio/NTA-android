@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false"
+            android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/place_photo"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/intro_image_1"
+                />
+
+            <View
+                android:id="@+id/place_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/place_photo"/>
+
+            <LinearLayout
+                android:id="@+id/lt_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/place_divider"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginRight="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="top"
+                        android:layout_marginRight="15dp"
+                        android:minWidth="28dp"
+                        android:src="@mipmap/ic_location"
+                        />
+
+                    <common.views.FontTextView
+                        android:id="@+id/place_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|left"
+                        android:alpha="0.54"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@android:color/black"
+                        android:textSize="13dp"
+                        app:fontName="roboto-light.ttf"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+                    <FrameLayout
+                        android:id="@+id/map_view"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:longClickable="false"
+                        android:layout_marginTop="13dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="13dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="top"
+                        android:layout_marginRight="17dp"
+                        android:minWidth="26dp"
+                        android:src="@mipmap/ic_info"
+                        />
+
+                    <common.views.FontTextView
+                        android:id="@+id/place_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|left"
+                        android:alpha="0.87"
+                        android:ellipsize="end"
+                        android:maxLines="5"
+                        android:textColor="@android:color/black"
+                        android:textSize="15dp"
+                        app:fontName="roboto-regular.ttf"/>
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/empty_vw"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/white"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/place_link"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_above="@+id/place_divider"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginBottom="-28dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="-28dp"
+                android:src="@mipmap/ic_place_link"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

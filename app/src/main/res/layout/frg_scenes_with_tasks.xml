@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp">
+
+        <common.views.FontTextView
+            android:id="@+id/tv_episode_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:text="Episode 5"
+            android:alpha="0.5"
+            android:textColor="@android:color/black"
+            android:textSize="14dp"
+            app:fontName="roboto-regular.ttf" />
+
+        <common.views.FontTextView
+            android:id="@+id/tv_scene_name"
+            android:layout_below="@+id/tv_episode_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:alpha="0.5"
+            android:text="Scene 2 - Finding Apartments"
+            android:textColor="@android:color/black"
+            android:textSize="14dp"
+            app:fontName="roboto-regular.ttf" />
+
+    </RelativeLayout>
+
+    <common.containers.SlidePagerContainer
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="#e0e0e0"
+        >
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_frg_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="50dp"/>
+    </common.containers.SlidePagerContainer>
+</LinearLayout>
