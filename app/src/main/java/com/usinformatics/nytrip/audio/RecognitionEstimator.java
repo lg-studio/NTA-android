@@ -66,6 +66,7 @@ public final class RecognitionEstimator {
            return estimates;
     }
 
+
     public static float getBestEstimateOf(String src, List<String> recognitions, EstimatorMode mode){
        float [] estimates=getEstimatesOf(src, recognitions, mode);
         float best=0.0f;

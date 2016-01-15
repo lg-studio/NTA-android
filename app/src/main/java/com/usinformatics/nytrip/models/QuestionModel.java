@@ -1,46 +1,36 @@
 package com.usinformatics.nytrip.models;
 
-import com.usinformatics.nytrip.models.types.QuestionType;
-
-import java.util.Arrays;
+import android.util.Log;
 
 /**
  * Created by D1m11n on 14.07.2015.
  */
-public class QuestionModel /*implements Parcelable */{
+public class QuestionModel {
 
-    public String id;
+    public enum Type{
+        AUDIO , TEXT;
+    }
 
-    public QuestionType type;
+    private String type;
 
-    public String urlAudioFromTeacher;
+    public String urlAudio;
 
     public String text;
 
-    public String [] variants;
-
-    public String audioId;
-
-    public String getText(){
-        return String.valueOf(text);
+    @Deprecated
+    public void setType(Type type){
+        this.type=type.toString();
     }
 
-    public QuestionModel(){}
-
-    public String[] getVariants() {
-        return variants;
+    public Type getType(){
+        if(type==null) return null;
+        try {
+            return Type.valueOf(type.toUpperCase());
+        }catch (IllegalArgumentException e)  {
+            Log.e("QUESTION_MODEL_TYPE", "illegal argument e = " + e.toString());
+            return null;
+        }
     }
 
-    @Override
-    public String toString() {
-        return "QuestionModel{" +
-                "id='" + id + '\'' +
-                ", type=" + type +
-                ", urlAudioFromTeacher='" + urlAudioFromTeacher + '\'' +
-                ", text='" + text + '\'' +
-                ", variants=" + Arrays.toString(variants) +
-                ", audioId='" + audioId + '\'' +
-                '}';
-    }
 
 }

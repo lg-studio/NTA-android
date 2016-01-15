@@ -10,7 +10,7 @@ public enum FacebookState {
     LOGIN_ERROR,
 
     /**
-     * data[0] will have old and data[1] new NetAccessToken
+     * data[0] will have old and data[1] new AccessToken
      */
     TOKEN_CHANGED,
 

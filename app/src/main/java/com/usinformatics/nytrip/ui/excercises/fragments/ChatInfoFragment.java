@@ -2,7 +2,6 @@ package com.usinformatics.nytrip.ui.excercises.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -18,10 +17,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.models.CharacterModel;
 import com.usinformatics.nytrip.models.TaskModel;
-import com.usinformatics.nytrip.models.types.ChatType;
-import com.usinformatics.nytrip.ui.additional.dialogs.DialogFactory;
 import com.usinformatics.nytrip.ui.excercises.ExcerciseActivity;
 
 import common.picasso.transformations.CircleTransform;
@@ -98,7 +94,12 @@ public class ChatInfoFragment extends Fragment{
                 mExcerciseActivity.displayPlace();
             }
         });
-        initCharacter(mTask.character);
+        mtvCharacterName.setText(String.valueOf(mTask.character.name));
+        mtvCharacterPost.setText(String.valueOf(mTask.character.desc));
+        if(mTask.character.getImageUrl()==null)
+            Picasso.with(mExcerciseActivity).load(R.mipmap.ic_character).transform(new CircleTransform()).into(mivCharacterPhoto);
+        else
+            Picasso.with(mExcerciseActivity).load(mTask.character.getImageUrl()).error(R.mipmap.ic_character).transform(new CircleTransform()).into(mivCharacterPhoto);
         mtvTaskDescription.setText(mTask.getDesc());
         mtvTaskName.setText(mTask.getName());
         mRatingbar.setRating(mTask.rating);
@@ -117,35 +118,8 @@ public class ChatInfoFragment extends Fragment{
         });
     }
 
-    private void initCharacter(CharacterModel character) {
-        if(character==null){
-            mRootView.findViewById(R.id.llt_character).setVisibility(View.INVISIBLE);
-            return;
-        }
-        mRootView.findViewById(R.id.llt_character).setVisibility(View.VISIBLE);
-        mtvCharacterName.setText(String.valueOf(character.name));
-        mtvCharacterPost.setText(String.valueOf(character.desc));
-        if(mTask.character.getImageUrl()==null)
-            Picasso.with(mExcerciseActivity).load(R.mipmap.ic_character_empty).transform(new CircleTransform()).into(mivCharacterPhoto);
-        else
-            Picasso.with(mExcerciseActivity).load(mTask.character.getImageUrl()).error(R.mipmap.ic_fake_character).transform(new CircleTransform()).into(mivCharacterPhoto);
-    }
-
     private void startExcercise() {
-        if(mTask.chatType!= ChatType.USER_CHOICE){
-            mExcerciseActivity.displayChat();
-            return;
-        }
-        DialogFactory.showModeRatingSelection(mExcerciseActivity, new DialogFactory.OnOkClickListener() {
-            @Override
-            public void wasOkClicked(DialogInterface dialog, boolean isOk) {
-                if(isOk)
-                    mTask.chatType= ChatType.TEACHER;
-                else
-                    mTask.chatType= ChatType.RECOGNITION;
-                mExcerciseActivity.displayChat();
-            }
-        });
+        mExcerciseActivity.displayChat();
     }
 
     private void updateHeightOfBackground() {

@@ -1,15 +1,13 @@
 package com.usinformatics.nytrip.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.usinformatics.nytrip.network.Api;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 /**
  * Created by D1m11n on 30.06.2015.
  */
-public class SceneModel{
+public class SceneModel {
 
 
     @SerializedName("id")
@@ -21,14 +19,6 @@ public class SceneModel{
 
     @SerializedName("tasks")
     public String [] taskIDs;
-
-    //private String image;
-
-    public String imageUrl;
-
-    public String getImageUrl(){
-        return String.format(Locale.ENGLISH, Api.URI_SCENE_IMAGE, sceneID);
-    }
 
 
     @Override

@@ -1,0 +1,25 @@
+ext {
+
+    appVersions = [
+        compileSdk: 22,
+        buildTools: "22.0.1",
+        minSdk: 14,
+        targetSdk: 22,
+        versionCode: 1,
+        versionName: "1.0"
+    ]
+
+    libraryVersions = [
+        rxJava: '1.0.12',
+        rxAndroid: '0.25.0',
+        butterKnife: '7.0.1',
+        dagger: '2.0',
+        javaxAnnotations: '3.1.1',
+        retrofit: '1.9.0',
+        okhttp: '2.2.0',
+        ormlite: '4.48',
+        support: '22.2.0',
+        tape: '1.2.3'
+    ]
+
+}

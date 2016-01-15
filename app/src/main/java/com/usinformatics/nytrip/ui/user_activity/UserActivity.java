@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.models.UserActivityModel;
 import com.usinformatics.nytrip.ui.BaseActivity;
 import com.usinformatics.nytrip.ui.additional.popup.ItemRawPopup;
 import com.usinformatics.nytrip.ui.additional.toolbar.ToolbarActions;
@@ -30,6 +29,8 @@ public class UserActivity extends BaseActivity {
     private void initUserActivityList() {
         ListView userList = (ListView) findViewById(R.id.user_activity_list);
         ArrayList<UserActivityModel> userActivityList = new ArrayList<>();
+
+
         UserActivityModel fakeData1 = new UserActivityModel();
         fakeData1.setTaskDate("friday");
         fakeData1.setTaskName("Arrive to NY");
@@ -66,7 +67,7 @@ public class UserActivity extends BaseActivity {
 
     @Override
     public void actionToolbarCallback(ToolbarActions currentItem) {
-        UserActivity.this.onBackPressed();
+
     }
 
     @Override

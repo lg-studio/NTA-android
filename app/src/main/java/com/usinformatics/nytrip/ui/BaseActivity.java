@@ -5,18 +5,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.usinformatics.nytrip.NyTripApplication;
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.helpers.ToastHelper;
-import com.usinformatics.nytrip.network.Api;
 import com.usinformatics.nytrip.ui.additional.popup.ItemRawPopup;
 import com.usinformatics.nytrip.ui.additional.toolbar.OnActionToolbarCallback;
 import com.usinformatics.nytrip.ui.additional.toolbar.ToolbarEngine;
+import com.zl.android.ui.scopes.ActivityScope;
+import com.zl.android.ui.scopes.ActivityScopeModule;
+import com.zl.android.ui.scopes.DaggerActivityScope;
 
 /**
  * Created by D1m11n on 17.06.2015.
  */
 public abstract class BaseActivity extends AppCompatActivity implements OnActionToolbarCallback {
 
+    private ActivityScope mActivityScope;
 
     //TODO ADD TOOLBAR ENGINE MODE
 
@@ -32,22 +35,18 @@ public abstract class BaseActivity extends AppCompatActivity implements OnAction
         mToolbarEngine=getInstanceOfToolbar();
         if (mToolbarEngine==null&&getIdResourcesOfToolbar()>0)
             mToolbarEngine=new ToolbarEngine(this, getIdResourcesOfToolbar());
-//        if(mToolbarEngine==null)
-//            return;
+        if(mToolbarEngine==null)
+            return;
         mToolbarEngine.setToolbarClick(this);
         mToolbarEngine.setNavigationButton(showNavigationButton);
-        mToolbarEngine.setActivePopupItemThatWillDisabled(getPopupItemOfCurrentActivity());
     }
 
     public ToolbarEngine getToolbar(){
         return mToolbarEngine;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.e("BASE_ACTIVITY", "optionsItemSel" + item );
-        Log.e("BASE_ACTIVITY", "toolbarEngine" + mToolbarEngine );
         if(mToolbarEngine==null)
            return super.onOptionsItemSelected(item);
         else
@@ -57,9 +56,8 @@ public abstract class BaseActivity extends AppCompatActivity implements OnAction
     @Override
     protected void onResume() {
         super.onResume();
-        if(!Api.BASE_URL.contains("herok")){
-            ToastHelper.showSimple(BaseActivity.this, "LOCAL IP");
-        }
+        if (mToolbarEngine!=null)
+            mToolbarEngine.setActivePopupItemThatWillDisabled(getPopupItemOfCurrentActivity());
     }
 
     public abstract ItemRawPopup getPopupItemOfCurrentActivity();
@@ -95,6 +93,14 @@ public abstract class BaseActivity extends AppCompatActivity implements OnAction
         return false;
     }
 
-
+    public ActivityScope getScope() {
+        if (mActivityScope == null) {
+            mActivityScope = DaggerActivityScope.builder()
+                    .activityScopeModule(new ActivityScopeModule(this))
+                    .appScope(NyTripApplication.getScope(getApplication()))
+                    .build();
+        }
+        return mActivityScope;
+    }
 
 }

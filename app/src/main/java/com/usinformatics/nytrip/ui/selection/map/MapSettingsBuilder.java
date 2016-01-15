@@ -15,7 +15,6 @@ public class MapSettingsBuilder {
         sets.setRotateGesturesEnabled(false);
         sets.setZoomControlsEnabled(true);
         sets.setMyLocationButtonEnabled(true);
-        sets.setMapToolbarEnabled(false);
         return map;
     }
 }

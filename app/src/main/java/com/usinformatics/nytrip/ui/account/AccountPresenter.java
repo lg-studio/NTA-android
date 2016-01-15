@@ -6,10 +6,12 @@ import android.util.Log;
 import com.facebook.FacebookRequestError;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
+import com.usinformatics.nytrip.NyTripApplication;
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.managers.AccountRepository;
-import com.usinformatics.nytrip.managers.RepositoryCallback;
 import com.usinformatics.nytrip.models.UserModel;
+import com.usinformatics.nytrip.network.NetworkErrorHelper;
+import com.usinformatics.nytrip.network.OnServerResponseCallback;
+import com.usinformatics.nytrip.network.RequestExecutor;
 import com.usinformatics.nytrip.network.gcm.InitGCMService;
 import com.usinformatics.nytrip.socials.facebook.FacebookState;
 import com.usinformatics.nytrip.socials.gplus.listeners.GPLusActionsListener;
@@ -18,9 +20,11 @@ import com.usinformatics.nytrip.storages.StorageFactory;
 import com.usinformatics.nytrip.storages.UserDataStorage;
 import com.usinformatics.nytrip.ui.account.activities.BaseAccountActivity;
 import com.usinformatics.nytrip.ui.account.model.AccountType;
-import com.usinformatics.nytrip.ui.additional.dialogs.DialogFactory;
 
 import java.util.Arrays;
+
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by D1m11n on 11.06.2015.
@@ -33,22 +37,6 @@ public class AccountPresenter implements GPLusActionsListener{
     private BaseAccountActivity mActivity;
     private UserDataStorage mUserStorage;
 
-    private RepositoryCallback<UserModel> mRepositoryCallback =new RepositoryCallback<UserModel>() {
-        @Override
-        public void onSuccess(UserModel objects) {
-            mUserStorage.saveUser(objects);
-            Log.e(TAG, " access token after   = " + mUserStorage.getUser().token);
-            initGCM();
-            mView.navigateToMain();
-            mView.finishActivity();
-        }
-
-        @Override
-        public void onError(String error) {
-            DialogFactory.showSimpleOneButtonDialog(mActivity, "ERROR", error);
-        }
-    };
-
     public AccountPresenter(BaseAccountActivity activity, IAccountView view) {
         mActivity = activity;
         mView = view;
@@ -60,7 +48,7 @@ public class AccountPresenter implements GPLusActionsListener{
     public void startRegister (AccountType type,final UserModel user, String password){
         if(user==null) return;
         user.setPassword(password);
-        startActionRegister(type, user);
+        startActionAccount(user);
     }
 
     public void startLogin (AccountType type,UserModel user, String password){
@@ -85,33 +73,35 @@ public class AccountPresenter implements GPLusActionsListener{
     }
 
     private void startDefaultLogin(UserModel user) {
-       startActionLogin(AccountType.DEFAULT, user);
+       startActionAccount(user);
     }
 
-    private void startActionLogin(AccountType type, final UserModel user){
-//        RequestExecutor.getInstance(mActivity).account(user, new OnServerResponseCallback<UserModel>() {
-//            @Override
-//            public void onResponse(UserModel objects, Response responseBody, RetrofitError error) {
-//                Log.e(TAG, "resp = " + objects + ", error " + error);
-//                if (NetworkErrorHelper.showNetworkErrorDialogIfNeeded(mActivity, error)) {
-//                    return;
-//                }
-//                Log.e(TAG, "user = " +user.toString());
-//                Log.e(TAG, " network user  = " + objects.toString());
-//               //ModelBridge.updateModel(user, objects);
-//                objects.setPassword(user.getPassword());
-//                mUserStorage.saveUser(objects);
-//                Log.e(TAG, " access token after   = " +mUserStorage.getUser().token);
-//                initGCM();
-//                mView.navigateToMain();
-//                mView.finishActivity();
-//            }
-//        });
-        AccountRepository.newInstance(mActivity).login(user, mRepositoryCallback);
-    }
+    private void startActionAccount(final UserModel user){
+        RequestExecutor.getInstance(mActivity).account(user, new OnServerResponseCallback<UserModel>() {
+            @Override
+            public void onResponse(UserModel objects, Response responseBody, RetrofitError error) {
+                Log.e(TAG, "resp = " + objects + ", error " + error);
+                if (NetworkErrorHelper.showNetworkErrorDialogIfNeeded(mActivity, error)) {
+                    return;
+                }
+                Log.e(TAG, "user = " + user.toString());
+                Log.e(TAG, " network user  = " + objects.toString());
+               //ModelBridge.updateModel(user, objects);
+                objects.setPassword(user.getPassword());
+                mUserStorage.saveUser(objects);
 
-    private void startActionRegister(AccountType type, UserModel user) {
-        AccountRepository.newInstance(mActivity).register(user, mRepositoryCallback);
+                String token = mUserStorage.getUser().token;
+                Log.e(TAG, " access token after   = " + token);
+
+                NyTripApplication.getScope(mActivity.getApplication())
+                        .webServiceLocator()
+                        .setAccessToken(token);
+
+                initGCM();
+                mView.navigateToMain();
+                mView.finishActivity();
+            }
+        });
     }
 
     private void initGCM() {

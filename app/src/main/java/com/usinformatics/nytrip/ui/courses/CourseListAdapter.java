@@ -1,6 +1,7 @@
 package com.usinformatics.nytrip.ui.courses;
 
 import android.app.Activity;
+import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,25 +25,25 @@ import common.views.FontTextView;
  */
 public class CourseListAdapter extends BaseAdapter {
 
-    private CourseSelectionActivity mActivity;
+    private Context mContext;
     private ArrayList<CourseModel> mCourseList;
     private int mSelectedPosition = -1;
-    private RadioButton mSelectedRB ;
-    private RelativeLayout mSelectedCourse;
+    private RadioButton mSelectedRB;
+    private RelativeLayout selectedCourse;
     private Holder holder;
 
-    public CourseListAdapter(CourseSelectionActivity activity, ArrayList<CourseModel> coursesList) {
-        this.mActivity = activity;
+    public CourseListAdapter(Context context, ArrayList<CourseModel> coursesList) {
+        this.mContext = context;
         this.mCourseList = coursesList;
-        findSelectedCourse();
+        findSelectedSemester();
     }
 
-    private void findSelectedCourse() {
-        String idCourse = StorageFactory.getUserStorage(mActivity).getCurrentCourseId();
-        if (ListsUtils.isEmpty(mCourseList) || TextUtils.isEmpty(idCourse))
+    private void findSelectedSemester() {
+        String idSemester = StorageFactory.getUserStorage(mContext).getCurrentCourseId();
+        if (ListsUtils.isEmpty(mCourseList) || TextUtils.isEmpty(idSemester))
             mSelectedPosition = -1;
         for (int i = 0; i < mCourseList.size(); i++)
-            if (mCourseList.get(i).id.equals(idCourse)) {
+            if (mCourseList.get(i).id.equals(idSemester)) {
                 mSelectedPosition = i;
                 return;
             }
@@ -68,7 +69,7 @@ public class CourseListAdapter extends BaseAdapter {
 
         if (convertView == null) {
 
-            LayoutInflater inflater = ((Activity) mActivity).getLayoutInflater();
+            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
             convertView = inflater.inflate(R.layout.item_select_semester, parent, false);
             holder = new Holder();
             holder.radioButton = (RadioButton) convertView.findViewById(R.id.semester_radio_btn);
@@ -85,8 +86,8 @@ public class CourseListAdapter extends BaseAdapter {
         holder.chooseCourse.setTag(holder);
         holder.radioButton.setClickable(false);
 
-        if (position == mSelectedPosition ) {
-            setItemChecked(convertView);
+        if (position == mSelectedPosition) {
+            setItemChecked();
         } else {
             setItemUnchecked();
         }
@@ -96,16 +97,15 @@ public class CourseListAdapter extends BaseAdapter {
 
     private void setItemUnchecked() {
         holder.radioButton.setChecked(false);
-        holder.chooseCourse.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
+        holder.chooseCourse.setBackgroundColor(mContext.getResources().getColor(R.color.white));
     }
 
-    private void setItemChecked(View view) {
+    private void setItemChecked() {
         holder.radioButton.setChecked(true);
-        holder.chooseCourse.setBackgroundColor(mActivity.getResources().getColor(R.color.orange_lite));
-        if(mSelectedRB == null ){
-            mSelectedRB = holder.radioButton;
-            mSelectedCourse = holder.chooseCourse;
-        }
+        mSelectedRB = holder.radioButton;
+        selectedCourse = holder.chooseCourse;
+        holder.chooseCourse.setBackgroundColor(mContext.getResources().getColor(R.color.orange_lite));
+
     }
 
     private void initSelectSemester(final int position) {
@@ -113,24 +113,19 @@ public class CourseListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Holder h = (Holder) v.getTag();
-                if (mSelectedRB != null) {
-                    mSelectedRB.setChecked(false);
-                    mSelectedCourse.setBackgroundColor(mActivity.getResources().getColor(R.color.white));
-                }
                 h.radioButton.setChecked(true);
-                v.setBackgroundColor(mActivity.getResources().getColor(R.color.orange_lite));
+                v.setBackgroundColor(mContext.getResources().getColor(R.color.orange_lite));
+
+                if (position != mSelectedPosition && mSelectedRB != null) {
+                    mSelectedRB.setChecked(false);
+                    selectedCourse.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+                }
                 mSelectedPosition = position;
                 mSelectedRB = (RadioButton) h.radioButton;
-                mSelectedCourse = (RelativeLayout) h.chooseCourse;
-                showAskNewCourseIfOherSelected(position);
+                selectedCourse = (RelativeLayout) h.chooseCourse;
             }
-        });
-    }
 
-    private void showAskNewCourseIfOherSelected(int position) {
-        if(StorageFactory.getUserStorage(mActivity).getCurrentCourseId().equals(mCourseList.get(position).id))
-            return;
-        mActivity.setNewCourse(mCourseList.get(position));
+        });
     }
 
     private class Holder {

@@ -73,9 +73,9 @@ public class CharacterFragment extends Fragment {
 
     private void initFoundedViews() {
         if(TextUtils.isEmpty(mCharacter.getImageUrl()))
-        Picasso.with(mActivity).load(R.mipmap.ic_character_empty).transform(new CircleTransform()).into(mivCharacterPhoto);
+        Picasso.with(mActivity).load(R.mipmap.ic_character).transform(new CircleTransform()).into(mivCharacterPhoto);
         else
-            Picasso.with(mActivity).load(mCharacter.getImageUrl()).error(R.mipmap.ic_character_empty).transform(new CircleTransform()).into(mivCharacterPhoto);
+            Picasso.with(mActivity).load(mCharacter.getImageUrl()).error(R.mipmap.ic_character).transform(new CircleTransform()).into(mivCharacterPhoto);
         mivCharacterPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

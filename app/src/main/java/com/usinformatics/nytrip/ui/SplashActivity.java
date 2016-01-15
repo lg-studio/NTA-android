@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.usinformatics.nytrip.AppConsts;
-import com.usinformatics.nytrip.databases.AudioDbManager;
+import com.usinformatics.nytrip.NyTripApplication;
 import com.usinformatics.nytrip.databases.EduMaterialDbManager;
 import com.usinformatics.nytrip.storages.StorageFactory;
 import com.usinformatics.nytrip.ui.account.activities.AccountActivity;
@@ -21,35 +21,28 @@ import com.usinformatics.nytrip.ui.selection.TasksSelectionActivity;
 public class SplashActivity extends AppCompatActivity {
 
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        initDB();
-
-        if (!TextUtils.isEmpty(StorageFactory.getUserStorage(this).getUser().token))
-            moveToOtherActivity(TasksSelectionActivity.class, AppConsts.SPLASH_DELAY);
-        else
-            moveToOtherActivity(AccountActivity.class, AppConsts.SPLASH_DELAY);
-    }
-
-    private void initDB() {
-        AudioDbManager.getInstance(this);
         EduMaterialDbManager.getInstance(this);
+        String token = StorageFactory.getUserStorage(this).getUser().token;
+        if (!TextUtils.isEmpty(token)) {
+
+            // set token to the singleton web service
+            NyTripApplication.getScope(getApplication())
+                    .webServiceLocator()
+                    .setAccessToken(token);
+
+            moveToOtherActivity(TasksSelectionActivity.class, AppConsts.SPLASH_DELAY);
+        } else {
+            moveToOtherActivity(AccountActivity.class, AppConsts.SPLASH_DELAY);
+        }
     }
-
-
-    /**
-     * You'll need this in your class to get the helper from the manager once per class.
-     */
-
 
     private void moveToOtherActivity(final Class activity, long delay){
         new Handler().postDelayed(new Runnable() {

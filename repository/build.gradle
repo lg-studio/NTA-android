@@ -1,0 +1,57 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    def versions = rootProject.ext.appVersions
+
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        versionCode versions.versionCode
+        versionName versions.versionName
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/LICENSE.txt'
+    }
+}
+
+dependencies {
+    compile project(':domain')
+
+    def versions = rootProject.ext.libraryVersions
+    compile "com.j256.ormlite:ormlite-android:${versions.ormlite}"
+    compile "com.squareup.retrofit:retrofit:${versions.retrofit}"
+    compile "com.squareup.okhttp:okhttp:${versions.okhttp}"
+    compile "com.squareup:tape:${versions.tape}"
+    compile "io.reactivex:rxjava:${versions.rxJava}"
+    compile "io.reactivex:rxandroid:${versions.rxAndroid}"
+    compile "com.jakewharton:butterknife:${versions.butterKnife}"
+    compile "com.google.dagger:dagger:${versions.dagger}"
+    compile "org.glassfish:javax.annotation:${versions.javaxAnnotations}"
+    compile "com.android.support:support-annotations:${versions.support}"
+    apt "com.google.dagger:dagger-compiler:${versions.dagger}"
+}

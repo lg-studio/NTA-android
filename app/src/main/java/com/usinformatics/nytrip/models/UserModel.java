@@ -1,5 +1,7 @@
 package com.usinformatics.nytrip.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Arrays;
 
 import common.utis.ListsUtils;
@@ -9,8 +11,10 @@ import common.utis.ListsUtils;
  */
 public class UserModel {
 
+    @SerializedName("first_name")
     public String firstName;
 
+    @SerializedName("last_name")
     public String lastName;
 
     public String email;
@@ -26,10 +30,6 @@ public class UserModel {
     private String password;
 
     public String role;
-
-    public int code;
-
-    public String imageUrl;
 
     public void setPassword(String password){
         this.password=password;
@@ -72,7 +72,6 @@ public class UserModel {
         return "UserModel{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", code='" + code + '\''+
                 ", email='" + email + '\'' +
                 ", teacherCode='" + teacherCode + '\'' +
                 ", token='" + token + '\'' +

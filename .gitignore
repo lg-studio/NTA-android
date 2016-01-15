@@ -39,6 +39,7 @@ _ReSharper.*/
 obj/
 app/app.iml
 .jar
+*.so
 
 secure_preferences/secure_preferences.iml
 .idea/misc.xml

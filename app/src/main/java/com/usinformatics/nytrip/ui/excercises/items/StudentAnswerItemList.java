@@ -1,6 +1,5 @@
 package com.usinformatics.nytrip.ui.excercises.items;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -18,19 +17,19 @@ import java.util.ArrayList;
 public class StudentAnswerItemList implements ChatItemList,StudentAnswerNotifier {
 
     private Holder holder;
-    private Activity mActivity;
+    private ExcerciseActivity mActivity;
     private ArrayList<ExecutedAnswerModel> mMessages= new ArrayList<>();
     private LayoutInflater mInflater;
 
 
 
-    public StudentAnswerItemList(Activity activity) {
+    public StudentAnswerItemList(ExcerciseActivity activity) {
         mActivity = activity;
     }
 
     @Override
     public int getViewType() {
-        return ChatItemType.STUDENT_MESSAGE.ordinal();
+        return ChatItemType.STUDENT_MASSAGE.ordinal();
     }
 
     @Override

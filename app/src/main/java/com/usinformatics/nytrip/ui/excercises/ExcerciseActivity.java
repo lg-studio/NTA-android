@@ -5,23 +5,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.WindowManager;
 
 import com.usinformatics.nytrip.AppConsts;
+import com.usinformatics.nytrip.FakeData;
 import com.usinformatics.nytrip.IntentConsts;
 import com.usinformatics.nytrip.R;
 import com.usinformatics.nytrip.audio.SpeechRecognizerEngine;
 import com.usinformatics.nytrip.audio.callbacks.OnGetTextCallback;
+import com.usinformatics.nytrip.audio.recorder.VoiceRecorder;
 import com.usinformatics.nytrip.audio.recorder.VoiceRecorderCallback;
 import com.usinformatics.nytrip.audio.speech.TextToSpeechEngine;
-import com.usinformatics.nytrip.databases.model.AudioModel;
-import com.usinformatics.nytrip.managers.EduMaterialRepository;
-import com.usinformatics.nytrip.managers.RepositoryCallback;
+import com.usinformatics.nytrip.models.AnswerModel;
+import com.usinformatics.nytrip.models.ChatModel;
 import com.usinformatics.nytrip.models.TaskModel;
-import com.usinformatics.nytrip.models.types.ChatType;
-import com.usinformatics.nytrip.network.voice.SendVoice;
 import com.usinformatics.nytrip.services.media.CustomMediaPlayer;
-import com.usinformatics.nytrip.storages.StorageFactory;
 import com.usinformatics.nytrip.ui.BaseActivity;
 import com.usinformatics.nytrip.ui.additional.dialogs.DialogFactory;
 import com.usinformatics.nytrip.ui.additional.popup.ItemRawPopup;
@@ -33,6 +30,8 @@ import com.usinformatics.nytrip.ui.excercises.fragments.ChatInfoFragment;
 import com.usinformatics.nytrip.ui.excercises.fragments.ChatPlaceFragment;
 import com.usinformatics.nytrip.ui.excercises.fragments.ChatResultFragment;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
 /**
@@ -42,15 +41,13 @@ public class ExcerciseActivity  extends BaseActivity  {
 
 
     private SpeechRecognizerEngine mSpeechEngine;
-    //private VoiceRecorder mRecorder;
-    private SendVoice mSendVoice;
+    private VoiceRecorder mRecorder;
     private TextToSpeechEngine mTTSEngine;
     private TaskModel mTask;
+    private ChatModel mChat= FakeData.getChat();
 
     private ChatInfoFragment infoFragment;
     private ChatFragment mChatFragment;
-
-    private CustomMediaPlayer mMediaPlayer;
 
     @Override
     public String getTag() {
@@ -78,41 +75,27 @@ public class ExcerciseActivity  extends BaseActivity  {
             onBackPressed();
     }
 
+//    private BroadcastReceiver mExcersizeReceiver= new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            if(intent==null||intent.getAction()==null) return;
+//            if(intent.getAction()==IntentConsts.TTS){
+//                initTTSEngineIfNeeded();
+//                startTTS(intent.getStringExtra(IntentConsts.Extra.MESSAGE));
+//            }
+//        }
+//    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_task_info);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         initToolbarEngine(false);
-        getTask();
+        mTask=getIntent().getParcelableExtra(IntentConsts.Extra.TASK);
+
     }
 
-    private void getTask() {
-        Intent intent= getIntent();
-        if(intent==null||!intent.hasExtra(IntentConsts.Extra.TASK)){
-            DialogFactory.showSimpleOneButtonDialog(ExcerciseActivity.this,"ERROR", "Task id error");
-            return;
-        }
-        String taskId=intent.getStringExtra(IntentConsts.Extra.TASK);
-        EduMaterialRepository.newInstance(ExcerciseActivity.this).getTask(StorageFactory.getUserStorage(ExcerciseActivity.this).getCurrentScene().sceneID, taskId, new RepositoryCallback<TaskModel>() {
-            @Override
-            public void onSuccess(TaskModel objects) {
-                mTask = objects;
-                if (mToolbarEngine == null) {
-                    initToolbarEngine(false);
-                }
-                mToolbarEngine.setToolbarTitle(mTask.getName());
-                displayChatInfo();
-            }
-
-            @Override
-            public void onError(String error) {
-                DialogFactory.showSimpleOneButtonDialog(ExcerciseActivity.this, "ERROR", "Task ERROR " + error);
-            }
-        });
-    }
-
-    public void displayChatInfo(){
+    public void displayEcerciseinfo(){
         if(infoFragment==null)
            infoFragment = ChatInfoFragment.newInstance(mTask);
         mToolbarEngine.setVisibilityMenu(true);
@@ -121,7 +104,7 @@ public class ExcerciseActivity  extends BaseActivity  {
 
     public void displayChat() {
         if(mChatFragment ==null)
-              mChatFragment = ChatFragment.newInstance(mTask);
+              mChatFragment = ChatFragment.newInstance(mChat);
         mToolbarEngine.setVisibilityMenu(false);
         getFragmentManager().beginTransaction().replace(R.id.exercise_fragment, mChatFragment).commit();
     }
@@ -135,22 +118,9 @@ public class ExcerciseActivity  extends BaseActivity  {
         mChatFragment=null;
     }
 
-    public void displayResultChat(final float mark){
-        if(mTask.chatType!=ChatType.TEACHER&&mark<AppConsts.MIN_MARK_SHOW_DIALOG){
-            DialogFactory.showLowMarkInfoSelection(ExcerciseActivity.this, mTask.name, Integer.toString((int) (mark*100)) , new DialogFactory.OnOkClickListener() {
-                @Override
-                public void wasOkClicked(DialogInterface dialog, boolean isOk) {
-                    finishChat();
-                    if(isOk)
-                        displayChatInfo();
-                    else
-                        getFragmentManager().beginTransaction().replace(R.id.exercise_fragment, ChatResultFragment.newInstance(mTask, mark)).commit();
-                }
-            });
-            return;
-        }
+    public void displayResultChat(float mark){
         finishChat();
-        getFragmentManager().beginTransaction().replace(R.id.exercise_fragment, ChatResultFragment.newInstance(mTask, mark)).commit();
+        getFragmentManager().beginTransaction().replace(R.id.exercise_fragment, ChatResultFragment.newInstance(mChat.chatType, mark)).commit();
     }
 
     public void displayCharacter() {
@@ -199,6 +169,10 @@ public class ExcerciseActivity  extends BaseActivity  {
     @Override
     protected void onResume() {
         super.onResume();
+        if(mToolbarEngine==null){
+            initToolbarEngine(false);
+        }
+        mToolbarEngine.setToolbarTitle(mTask.getName());
     }
 
     @Override
@@ -210,6 +184,7 @@ public class ExcerciseActivity  extends BaseActivity  {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         boolean result= super.onCreateOptionsMenu(menu);
+        displayEcerciseinfo();
         return result;
     }
 
@@ -231,7 +206,7 @@ public class ExcerciseActivity  extends BaseActivity  {
     }
 
     private void askResultActionOrEnd() {
-        if(mTask.chatType == ChatType.RECOGNITION){
+        if(mChat.chatType == ChatModel.ChatType.RECOGNITION){
             ExcerciseActivity.this.finish();
             return;
         }
@@ -247,18 +222,19 @@ public class ExcerciseActivity  extends BaseActivity  {
         DialogFactory.showSimpleTwoButtonsDialog(ExcerciseActivity.this, "Chat", "Do you want to stop chat", new DialogFactory.OnOkClickListener() {
             @Override
             public void wasOkClicked(DialogInterface dialog, boolean isOk) {
-                if (isOk) {
+                if(isOk){
                     ExcerciseActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             finishChat();
-                            displayChatInfo();
+                            displayEcerciseinfo();
                         }
                     });
                 }
             }
         });
     }
+
 
     public void startSpeech(String message,TextToSpeechEngine.OnTextToSpeechCallback callback){
         initTTSEngineIfNeeded();
@@ -275,60 +251,27 @@ public class ExcerciseActivity  extends BaseActivity  {
             mSpeechEngine = new SpeechRecognizerEngine(ExcerciseActivity.this);
     }
 
-    private void initCustomMediaPLayerIfNeeded(){
-        if(mMediaPlayer==null)
-            mMediaPlayer=new CustomMediaPlayer();
-    }
-
-    private void initVoiceRecorderIfNeeded(){
-        if(mSendVoice==null)
-            mSendVoice= new SendVoice(ExcerciseActivity.this, mTask.name);
-    }
-
     public void startSpeechRecognize(OnGetTextCallback callback) {
         initSpeechRecognitionIfneeded();
-        if(mTTSEngine!=null)
-            mTTSEngine.stopSpeech();
         mSpeechEngine.startTextRecognizer(callback);
     }
 
+    public void showVariants(AnswerModel answer){
+        mChatFragment.showVariants(answer);
+    }
+
     public void startPlayAudio(String urlAudio) {
-        initCustomMediaPLayerIfNeeded();
-        mMediaPlayer.playUrl(urlAudio);
+        new CustomMediaPlayer().playUrl(urlAudio);
     }
 
-    public void startRecordVoice(final AudioModel audio, final VoiceRecorderCallback callback) {
-        DialogFactory.showRecordDialog(ExcerciseActivity.this, AppConsts.MAX_RECORD_DURATIONs, new DialogFactory.RecordProcessCallback() {
-            @Override
-            public void started() {
-                initVoiceRecorderIfNeeded();
-                mSendVoice.startRecording(audio);
-                if(callback!=null)
-                    callback.onStart();
-            }
-
-            @Override
-            public void stopped() {
-                if(callback!=null) {
-                    callback.onEnd("");
-                }
-                mSendVoice.stopRecording();
-            }
-
-            @Override
-            public void aborted() {
-               mSendVoice.stopRecording();
-            }
-        });
-    }
-
-    public void stopSpeech() {
-        if(mTTSEngine!=null/*&&mTTSEngine.isRunning()*/)
-            mTTSEngine.stopSpeech();
-    }
-
-    public void stopPlayAudio() {
-        if(mMediaPlayer!=null&&mMediaPlayer.isPlaying())
-            mMediaPlayer.stop();
+    public void startRecordVoice(VoiceRecorderCallback callback) {
+        if(mRecorder==null)
+            mRecorder= new VoiceRecorder(ExcerciseActivity.this);
+        try {
+            mRecorder.start(new File(AppConsts.APP_DIRECTORY_PATH + "/RESULT_80001.ogg"),callback);
+            //TODO REMOVE EXCEPTION AND USE ERROR CALLBACK
+        } catch (IOException e) {
+            log("====RECORD ERROR====" + e.toString());
+        }
     }
 }

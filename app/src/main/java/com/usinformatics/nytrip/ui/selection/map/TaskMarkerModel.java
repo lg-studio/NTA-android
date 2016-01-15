@@ -7,38 +7,26 @@ import com.google.android.gms.maps.model.LatLng;
  */
 public class TaskMarkerModel {
 
-    public LatLng latlng;
+    private LatLng latlng;
 
-    public String taskId;
+    public int taskId;
+
 
     public String iconUrl;
 
     public String title;
 
-//    public double latitude;
-//
-//    public double longitude;
+    private double latitude;
+
+    private double longitude;
 
     public String snippet;
 
-    public int idIcon;
-
 
     public LatLng getLatLng(){
-//      if (latlng==null)
-//          latlng= new LatLng(latitude, longitude);
+      if (latlng==null)
+          latlng= new LatLng(latitude, longitude);
         return latlng;
     }
 
-    @Override
-    public String toString() {
-        return "TaskMarkerModel{" +
-                "latlng=" + latlng +
-                ", taskId='" + taskId + '\'' +
-                ", iconUrl='" + iconUrl + '\'' +
-                ", title='" + title + '\'' +
-                ", snippet='" + snippet + '\'' +
-                ", idIcon=" + idIcon +
-                '}';
-    }
 }

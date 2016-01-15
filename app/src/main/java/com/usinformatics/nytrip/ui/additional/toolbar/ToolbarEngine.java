@@ -21,9 +21,8 @@ public class ToolbarEngine implements OnItemPopupClick, MenuItem.OnMenuItemClick
     private static final String TAG = "TOOLBAR_ENGINE";
     protected final AppCompatActivity mActivity;
     protected MenuItem mMenu;
-    private boolean isMenuVisible=true;
     protected boolean isEnabled = true;
-    private static PopupWindowBuilder mPopupWindow;
+    private PopupWindowBuilder mPopupWindow;
     protected OnActionToolbarCallback mToolbarClickCallback;
 
     protected Toolbar mToolbar;
@@ -63,7 +62,7 @@ public class ToolbarEngine implements OnItemPopupClick, MenuItem.OnMenuItemClick
         mMenu.setOnMenuItemClickListener(this);
         //mMenu.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
         MenuItemCompat.setShowAsAction(mMenu,MenuItem.SHOW_AS_ACTION_ALWAYS);
-        mMenu.setVisible(isMenuVisible);
+        mMenu.setVisible(true);
     }
 
     @Override
@@ -75,9 +74,7 @@ public class ToolbarEngine implements OnItemPopupClick, MenuItem.OnMenuItemClick
     protected void buildExtMenu(final Menu menu, int idMenuToInflate) {}
 
     public void setVisibilityMenu(boolean isVisible){
-        if(mMenu!=null)
-            mMenu.setVisible(isVisible);
-        else isMenuVisible=isVisible;
+        mMenu.setVisible(isVisible);
     }
 
 

@@ -1,21 +1,16 @@
 package com.usinformatics.nytrip.network;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.usinformatics.nytrip.models.CourseModel;
 import com.usinformatics.nytrip.models.EpisodeModel;
 import com.usinformatics.nytrip.models.SceneModel;
-import com.usinformatics.nytrip.network.models.NetAudioFileIdModel;
-import com.usinformatics.nytrip.network.models.NetCourseModel;
-import com.usinformatics.nytrip.network.models.NetEpisodeModel;
-import com.usinformatics.nytrip.network.models.NetExecutedChatModel;
-import com.usinformatics.nytrip.network.models.NetGCMToken;
-import com.usinformatics.nytrip.network.models.NetGroupModel;
-import com.usinformatics.nytrip.network.models.NetSceneModel;
-import com.usinformatics.nytrip.network.models.NetTaskModel;
-import com.usinformatics.nytrip.network.models.NetUserModel;
-import com.usinformatics.nytrip.network.models.NetSendFeedbackModel;
+import com.usinformatics.nytrip.models.TaskModel;
+import com.usinformatics.nytrip.models.UserModel;
+import com.usinformatics.nytrip.network.models.CourseListModel;
+import com.usinformatics.nytrip.network.models.GCMToken;
 import com.usinformatics.nytrip.network.requestors.AccountRequests;
-import com.usinformatics.nytrip.network.requestors.ChatlRequests;
 import com.usinformatics.nytrip.network.requestors.EduMaterialRequests;
 import com.usinformatics.nytrip.network.requestors.GCMRequest;
 import com.usinformatics.nytrip.storages.StorageFactory;
@@ -52,7 +47,7 @@ public class RequestExecutor {
         return mInstance;
     }
 
-    public void login(final NetUserModel user, OnServerResponseCallback<NetUserModel> callback) {
+    public void account(final UserModel user, OnServerResponseCallback<UserModel> callback) {
         mAccountRequest.getAccessTokenThroughLogin(user, callback);
     }
 
@@ -63,17 +58,17 @@ public class RequestExecutor {
 
     public void sendGCMToken(String token, OnServerResponseCallback<Object> callback){
         ServiceGenerator.createService(GCMRequest.class, StorageFactory.getUserStorage(mContext).getUser().token)
-                .sendGCMToken(new NetGCMToken(token), callback);
+                .sendGCMToken(new GCMToken(token), callback);
     }
 
-    public void coursesList(OnServerResponseCallback<NetGroupModel[]> callback) {
+    public void coursesList(OnServerResponseCallback<CourseListModel[]> callback) {
         ServiceGenerator.createService(AccountRequests.class, StorageFactory.getUserStorage(mContext).getUser().token)
                 .getGroupsInfo(callback);
     }
 
-    public void courses(String classId, OnServerResponseCallback<NetCourseModel[]> callback) {
+    public void courses(String groupId, OnServerResponseCallback<CourseModel[]> callback) {
         initEduMaterialExecutorIfNeeded();
-        mEduMaterialRequest.getCourses(classId, callback);
+        mEduMaterialRequest.getCourses(groupId, callback);
     }
 
     public void episodesWithScenes(String semesterId, OnServerResponseCallback<EpisodeModel[]> callback) {
@@ -86,27 +81,12 @@ public class RequestExecutor {
         mEduMaterialRequest.getScenes(episodeId, callback);
     }
 
-    public void scene(String sceneId, OnServerResponseCallback<NetSceneModel> callback) {
-        initEduMaterialExecutorIfNeeded();
-        mEduMaterialRequest.getScene(sceneId, callback);
-    }
-
-    public void episode(String episodeId, OnServerResponseCallback<NetEpisodeModel> callback) {
-        initEduMaterialExecutorIfNeeded();
-        mEduMaterialRequest.getEpisode(episodeId, callback);
-    }
-
-    public void tasks(String sceneId, OnServerResponseCallback<NetTaskModel[]> callback) {
+    public void tasks(String sceneId, OnServerResponseCallback<TaskModel[]> callback) {
         initEduMaterialExecutorIfNeeded();
         mEduMaterialRequest.getTasks(sceneId, callback);
     }
 
-    public void task(String sceneId,String taskId, OnServerResponseCallback<NetTaskModel> callback) {
-        initEduMaterialExecutorIfNeeded();
-        mEduMaterialRequest.getTask(sceneId,taskId, callback);
-    }
-
-    public void register(final NetUserModel user, OnServerResponseCallback<NetUserModel> callback) {
+    public void register(final UserModel user, OnServerResponseCallback<UserModel> callback) {
         mAccountRequest.getAccessTokenThroughRegister(user, callback);
     }
 
@@ -121,21 +101,10 @@ public class RequestExecutor {
         mEduMaterialRequest.sendAudio(audioId, filePath, callback);
     }
 
-    public void sendChatResult(NetExecutedChatModel chat, final OnServerResponseCallback<NetAudioFileIdModel> callback){
-        ServiceGenerator.createService(ChatlRequests.class, StorageFactory.getUserStorage(mContext).getUser().token).sendChatResult(chat,callback);
-    }
-
-    public void sendFeedback(NetSendFeedbackModel model, final OnServerResponseCallback<Object> callback){
-        mAccountRequest.sendFeedback(model,callback);
-    }
-
     public void reset() {
         mAccountRequest = null;
         mEduMaterialRequest = null;
         mContext = null;
         mInstance = null;
     }
-
-
-
 }

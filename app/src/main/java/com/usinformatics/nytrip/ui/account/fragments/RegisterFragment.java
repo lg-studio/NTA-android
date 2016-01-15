@@ -91,17 +91,12 @@ public class RegisterFragment extends BaseFragment {
                 Log.e(TAG, "initViews; on CLick");
                 if (!validateUserFields())
                     return;
-//                if(!NumberHelper.isInteger(metGroup.getText().toString())) {
-//                    mActivity.setUsernameError("Code must be an integer");
-//                    return;
-//                }
                 Log.e(TAG, "initViews; on CLick");
                 UserModel user = new UserModel();
                 user.email = metEmail.getText().toString();
                 user.firstName = metFirstName.getText().toString();
                 user.lastName = metLastName.getText().toString();
                 user.teacherCode = metGroup.getText().toString();
-                user.code=Integer.parseInt(metGroup.getText().toString());
                 mPresenter.startRegister(AccountType.DEFAULT, user, metPassword.getText().toString());
             }
         });
@@ -141,7 +136,7 @@ public class RegisterFragment extends BaseFragment {
         }
         if (metPassword.getText().length() < AppConsts.MIN_PASS_LENGTH) {
             Log.e(TAG, "Password is empty");
-            mActivity.setUsernameError("Password is too short ( required min 5 symbols )");
+            mActivity.setUsernameError("Password is too short ( required min 6 symbols )");
             return false;
         }
         return true;

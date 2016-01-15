@@ -4,7 +4,6 @@ import com.usinformatics.nytrip.models.EpisodeModel;
 import com.usinformatics.nytrip.models.SceneModel;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by D1m11n on 15.06.2015.
@@ -42,9 +41,5 @@ public class EpisodesScenesListModel {
         this.childArray=childArray;
     }
 
-    public EpisodesScenesListModel(List<EpisodeModel> groupArray, HashMap<EpisodeModel,SceneModel[]> childArray){
-        this.groupArray= groupArray.toArray(new EpisodeModel[groupArray.size()]);
-        this.childArray=childArray;
-    }
 
 }

@@ -59,9 +59,5 @@ public class CourseDBModel {
         this.episodesArray = Arrays.toString(episodesArray);
     }
 
-    public String getEpisodesArrayAsString(){
-        return this.episodesArray;
-    }
-
     public CourseDBModel(){}
 }

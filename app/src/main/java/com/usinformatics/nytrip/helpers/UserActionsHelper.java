@@ -28,7 +28,6 @@ public final class UserActionsHelper {
                     activity.finish();
                     RequestExecutor.getInstance(activity).reset();
                     StorageFactory.getEduStorage(activity).clearAllCourses();
-
                 }
             }
         });

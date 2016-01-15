@@ -20,19 +20,11 @@ public interface IntentConsts {
         String MESSAGE="message";
 
         String SCENES="scenes";
-
-        String EPISODES="episodes";
-
-        String CONTENT_TYPE="com.usinformatics.nytrip.content_type";
     }
 
     public String TTS= "tts";
 
     public String AUDIO="audio";
-
-    public String UPDATE_CONTENT="com.usinformatics.nytrip.update_content";
-
-
 
 
 

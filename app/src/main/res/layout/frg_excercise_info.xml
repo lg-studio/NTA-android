@@ -126,7 +126,6 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"/>
                     <LinearLayout
-                        android:id="@+id/llt_character"
                         android:layout_width="match_parent"
                         android:layout_toRightOf="@+id/iv_character_photo"
                         android:layout_marginLeft="9dp"

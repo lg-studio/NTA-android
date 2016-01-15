@@ -10,7 +10,6 @@ import android.media.AudioRecord;
  * http://stackoverflow.com/questions/8499042/android-audiorecord-example
  * http://habrahabr.ru/post/137708/
  */
-@Deprecated
 class VoiceRecorderConfig {
 
 

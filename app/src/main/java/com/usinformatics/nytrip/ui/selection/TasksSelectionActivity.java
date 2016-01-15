@@ -1,19 +1,14 @@
 package com.usinformatics.nytrip.ui.selection;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.usinformatics.nytrip.IntentConsts;
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.converters.ModelBridge;
 import com.usinformatics.nytrip.helpers.UserActionsHelper;
 import com.usinformatics.nytrip.models.TaskModel;
 import com.usinformatics.nytrip.storages.StorageFactory;
@@ -25,12 +20,14 @@ import com.usinformatics.nytrip.ui.additional.toolbar.ExtToolbarEngine;
 import com.usinformatics.nytrip.ui.additional.toolbar.ToolbarActions;
 import com.usinformatics.nytrip.ui.additional.toolbar.ToolbarEngine;
 import com.usinformatics.nytrip.ui.additional.toolbar.ToolbarMode;
+import com.usinformatics.nytrip.ui.selection.fragments.EpisodesPresenterFragment;
 import com.usinformatics.nytrip.ui.excercises.ExcerciseActivity;
 import com.usinformatics.nytrip.ui.selection.fragments.EpisodesWithScenesFragment;
 import com.usinformatics.nytrip.ui.selection.fragments.IFragment;
-import com.usinformatics.nytrip.ui.selection.fragments.RefreshFragment;
 import com.usinformatics.nytrip.ui.selection.fragments.SceneWithTaskListFragment;
 import com.usinformatics.nytrip.ui.selection.fragments.TaskMapFragment;
+import com.zl.android.ui.PresenterFragment;
+import com.zl.android.ui.features.catalog.EpisodesBrowserPresenter;
 
 /**
  * Created by D1m11n on 17.06.2015.
@@ -47,7 +44,7 @@ public class TasksSelectionActivity extends BaseActivity {
 
     @Override
     public ItemRawPopup getPopupItemOfCurrentActivity() {
-        return ItemRawPopup.MAIN;
+        return null;
     }
 
     @Override
@@ -114,35 +111,22 @@ public class TasksSelectionActivity extends BaseActivity {
 
     private void displayMap() {
         ((ExtToolbarEngine) mToolbarEngine).setToolbarTitle("Map", ToolbarMode.MAP);
-        //if (mMapFragment == null)
-            mMapFragment = TaskMapFragment.newInstance(ModelBridge.getMarkersFrom(mScenesWithTaskListFragment.getTasks()));
-//        else
-//            mMapFragment.
+        if (mMapFragment == null)
+            mMapFragment = TaskMapFragment.newInstance();
         replaceFragment(mMapFragment);
     }
 
 
-    public void displayEpisodesScenes() {
-        if (mEpisodesFragment == null)
-            mEpisodesFragment = EpisodesWithScenesFragment.newInstance();
+    private void displayEpisodesScenes() {
         ((ExtToolbarEngine) mToolbarEngine).setToolbarTitle("Scene selection", ToolbarMode.SIMPLE);
-        replaceFragment(mEpisodesFragment);
+        replaceFragment(EpisodesPresenterFragment.newInstance(EpisodesBrowserPresenter.class));
     }
 
     public void displayScenesTasks() {
         if (mScenesWithTaskListFragment == null)
-            mScenesWithTaskListFragment = SceneWithTaskListFragment.newInstance(/*mUserData.getCurrentEpisode(), mUserData.getCurrentScene()*/);
-       // mScenesWithTaskListFragment.updateContent();
-        ((ExtToolbarEngine) mToolbarEngine).setToolbarTitle("Task selection", ToolbarMode.TASKS);
+            mScenesWithTaskListFragment = SceneWithTaskListFragment.newInstance(mUserData.getCurrentEpisode(), mUserData.getCurrentScene());
+        ((ExtToolbarEngine) mToolbarEngine).setToolbarTitle("Scene selection", ToolbarMode.TASKS);
         replaceFragment(mScenesWithTaskListFragment);
-    }
-
-    public void displayScenesTasks(String taskId) {
-        Log.e(TAG, "TASK ID = " +taskId + ", " + mScenesWithTaskListFragment);
-        if(mScenesWithTaskListFragment==null|| TextUtils.isEmpty(taskId))
-            return;
-        displayScenesTasks();
-        mScenesWithTaskListFragment.setPositionBy(taskId);
     }
 
     private void replaceFragment(IFragment fragment) {
@@ -158,10 +142,6 @@ public class TasksSelectionActivity extends BaseActivity {
             return;
         Log.e(TAG, "FRAGMENT NOW IS = " + mCurrentFragment.getFragmentType());
         if (mCurrentFragment == null || mCurrentFragment.getFragmentType() == IFragment.Type.EPISODES) {
-            UserActionsHelper.logout(TasksSelectionActivity.this);
-            return;
-        }
-        if(mCurrentFragment==null || mCurrentFragment.getFragmentType()== IFragment.Type.REFRESH){
             UserActionsHelper.logout(TasksSelectionActivity.this);
             return;
         }
@@ -194,48 +174,7 @@ public class TasksSelectionActivity extends BaseActivity {
 
     public void openTaskWindow(TaskModel item) {
         Intent intent= new Intent(TasksSelectionActivity.this, ExcerciseActivity.class);
-        intent.putExtra(IntentConsts.Extra.TASK, item.id);
+        intent.putExtra(IntentConsts.Extra.TASK, item);
         TasksSelectionActivity.this.startActivity(intent);
-    }
-
-    public void displayRefreshFragment(IFragment invokedFragment){
-        replaceFragment(RefreshFragment.newInstance(invokedFragment, new RefreshFragment.OnClickListener() {
-            @Override
-            public void onCLick(IFragment.Type type) {
-                if(type== IFragment.Type.EPISODES)
-                  displayEpisodesScenes();
-                if(type== IFragment.Type.TASKS)
-                    displayScenesTasks();
-            }
-        }));
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        registerReceiver(mUpdateReceiver, new IntentFilter(IntentConsts.UPDATE_CONTENT));
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(mUpdateReceiver);
-    }
-
-    private BroadcastReceiver mUpdateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String type=intent.getStringExtra(IntentConsts.Extra.CONTENT_TYPE);
-            updateContentOnIntentReceivedBy(type);
-        }
-    };
-
-    private void updateContentOnIntentReceivedBy(String type) {
-      if(type==null) return;
-      if(mCurrentFragment==null)
-          return;
-      if(mCurrentFragment.getFragmentType()== IFragment.Type.REFRESH||mCurrentFragment.getFragmentType()== IFragment.Type.MAP)
-          return;
-        mCurrentFragment.updateContent();
     }
 }

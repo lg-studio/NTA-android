@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="22dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginBottom="29dp"
+            android:layout_marginTop="27dp"
             android:gravity="center"
             android:text="@string/Task_completed"
             android:background="@null"
@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/iv_result"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
+            android:layout_width="136dp"
+            android:layout_height="136dp"
             android:layout_below="@+id/title_mark"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="-68dp"
@@ -80,11 +80,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="15dp"
+                        android:layout_marginBottom="19dp"
                         android:gravity="center"
                         android:text="89%"
                         android:textColor="@color/black_89"
-                        android:textSize="64dp"
+                        android:textSize="72dp"
                         app:fontName="roboto-medium.ttf"/>
                     <common.views.FontTextView
                         android:id="@+id/send_to_teacher"

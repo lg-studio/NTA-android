@@ -3,7 +3,7 @@ package com.usinformatics.nytrip.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.SerializedName;
 import com.usinformatics.nytrip.network.Api;
 
 import java.util.Locale;
@@ -17,15 +17,17 @@ public class CharacterModel implements Parcelable  {
 
     public String desc;
 
-    public String imgUrl;
+    @SerializedName("image")
+    private String imgUrl;
 
-    public LatLng latLng;
+    public double lat;
+
+    public double lon;
 
     public CharacterModel(Parcel source) {
         name=source.readString();
         desc=source.readString();
         imgUrl=source.readString();
-        latLng=source.readParcelable(LatLng.class.getClassLoader());
     }
 
     public CharacterModel(){}
@@ -46,7 +48,6 @@ public class CharacterModel implements Parcelable  {
         dest.writeString(name);
         dest.writeString(desc);
         dest.writeString(imgUrl);
-        dest.writeParcelable(latLng, flags);
     }
 
 

@@ -4,17 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 
-import com.usinformatics.nytrip.BuildConfig;
-import com.usinformatics.nytrip.NyTripApplication;
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.managers.AccountRepository;
-import com.usinformatics.nytrip.managers.RepositoryCallback;
-import com.usinformatics.nytrip.network.models.NetSendFeedbackModel;
-import com.usinformatics.nytrip.storages.StorageFactory;
 import com.usinformatics.nytrip.ui.BaseActivity;
-import com.usinformatics.nytrip.ui.additional.dialogs.DialogFactory;
 import com.usinformatics.nytrip.ui.additional.popup.ItemRawPopup;
 import com.usinformatics.nytrip.ui.additional.toolbar.ToolbarActions;
 import com.usinformatics.nytrip.ui.additional.toolbar.ToolbarEngine;
@@ -32,16 +24,7 @@ public class SettingsActivity extends BaseActivity {
         mToolbarEngine.setToolbarTitle("Settings");
         initNotificationsSettings();
         initSendFeedback();
-        displayVersion();
-    }
 
-    private void displayVersion() {
-        TextView version= (TextView) findViewById(R.id.version);
-        if (BuildConfig.DEBUG) {
-            version.setVisibility(View.VISIBLE);
-            version.setText("Ver: " + ((NyTripApplication)getApplicationContext()).getAppVersion() );
-        }else
-            version.setVisibility(View.GONE);
     }
 
     private void initSendFeedback() {
@@ -54,30 +37,6 @@ public class SettingsActivity extends BaseActivity {
     }
         //TODO  need implement feedback
     private void sendFeedback() {
-        DialogFactory.showFeedback(SettingsActivity.this, new DialogFactory.FeedbackCallback() {
-            @Override
-            public void onFeedback(String theme, String feedback) {
-                sendFeedback(theme, feedback);
-            }
-        });
-    }
-
-    private void sendFeedback(String theme, String feedback) {
-        NetSendFeedbackModel m= new NetSendFeedbackModel();
-        m.from= StorageFactory.getUserStorage(SettingsActivity.this).getUser().email;
-        m.subject=theme;
-        m.text=feedback;
-        AccountRepository.newInstance(SettingsActivity.this).sendFeedback(m, new RepositoryCallback<NetSendFeedbackModel>() {
-            @Override
-            public void onSuccess(NetSendFeedbackModel objects) {
-                DialogFactory.showSimpleOneButtonDialog(SettingsActivity.this,"","Thank you for your feedback");
-            }
-
-            @Override
-            public void onError(String error) {
-                DialogFactory.showSimpleOneButtonDialog(SettingsActivity.this,"Error","Cannot send feedback: " + error);
-            }
-        });
 
     }
 

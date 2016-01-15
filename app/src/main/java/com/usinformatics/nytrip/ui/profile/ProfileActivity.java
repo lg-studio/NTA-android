@@ -2,13 +2,8 @@ package com.usinformatics.nytrip.ui.profile;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.helpers.PicassoHelper;
-import com.usinformatics.nytrip.models.UserModel;
-import com.usinformatics.nytrip.storages.StorageFactory;
 import com.usinformatics.nytrip.ui.BaseActivity;
 import com.usinformatics.nytrip.ui.additional.popup.ItemRawPopup;
 import com.usinformatics.nytrip.ui.additional.toolbar.ToolbarActions;
@@ -34,20 +29,10 @@ public class ProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_profile);
         initToolbarEngine(true);
-        mToolbarEngine.setToolbarTitle("Profile");
-        findAndInitViews();
-
+        mToolbarEngine.setToolbarTitle("Dictionary");
         initFragments();
         initViewPager();
         initTabs();
-    }
-
-    private void findAndInitViews() {
-        UserModel u= StorageFactory.getUserStorage(ProfileActivity.this).getUser();
-        ((TextView) findViewById(R.id.profile_name)).setText("" + u.firstName );
-        ((TextView) findViewById(R.id.profile_data1)).setText(""+u.lastName);
-        ((TextView) findViewById(R.id.profile_data2)).setText(""+u.email);
-        PicassoHelper.showRoundedImage(ProfileActivity.this,u.imageUrl,R.mipmap.ic_character_empty, (ImageView) findViewById(R.id.profile_photo));
     }
 
     private void initFragments() {

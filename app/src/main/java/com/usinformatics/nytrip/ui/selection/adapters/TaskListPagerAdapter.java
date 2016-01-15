@@ -3,11 +3,9 @@ package com.usinformatics.nytrip.ui.selection.adapters;
 import android.content.Context;
 import android.os.Environment;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.helpers.PicassoHelper;
 import com.usinformatics.nytrip.models.TaskModel;
 import com.usinformatics.nytrip.preferences.PrefsUser;
 import com.usinformatics.nytrip.ui.selection.TasksSelectionActivity;
@@ -40,7 +38,6 @@ public class TaskListPagerAdapter extends NoFragmentViewPagerAdapter<TaskModel> 
         title.setText(getItem(position).name);
         TextView description = (TextView) layout.findViewById(R.id.tv_task_info);
         description.setText(getItem(position).name);
-        PicassoHelper.showSimpleImage(mActivity,getItem(position).getImageUrl(), R.mipmap.test_place, (ImageView)layout.findViewById(R.id.iv_task_image));
         layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,10 +48,8 @@ public class TaskListPagerAdapter extends NoFragmentViewPagerAdapter<TaskModel> 
     }
 
     private void startExercise(int pos) {
-        TaskModel t=getItem(pos);
-
         generatePathForTask(pos);
-        mActivity.openTaskWindow(t);
+        mActivity.openTaskWindow(getItem(pos));
     }
 
     private void generatePathForTask(int position) {

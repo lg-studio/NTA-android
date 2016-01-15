@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.models.UserActivityModel;
 
 import java.util.ArrayList;
 

@@ -47,7 +47,7 @@ public class ProfileEpisodesAdapter extends BaseAdapter {
         if(convertView==null){
 
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
-            convertView = inflater.inflate(R.layout.item_profile_episode, parent, false);
+            convertView = inflater.inflate(R.layout.profile_episode_item, parent, false);
             holder = new ViewHolder();
             holder.episodeNumber = (TextView) convertView.findViewById(R.id.profile_episode_number);
             holder.name = (TextView) convertView.findViewById(R.id.profile_episode_name);

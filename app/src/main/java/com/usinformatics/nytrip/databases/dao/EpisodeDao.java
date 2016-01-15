@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * Created by D1m11n on 22.06.2015.
  */
 
-public class EpisodeDao extends BaseDaoImpl<EpisodeDBModel, String> {
+public class EpisodeDao extends BaseDaoImpl<EpisodeDBModel, Long> {
 
     public EpisodeDao(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, EpisodeDBModel.class);

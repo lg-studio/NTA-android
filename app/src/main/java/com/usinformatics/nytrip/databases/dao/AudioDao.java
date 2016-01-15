@@ -8,8 +8,6 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.usinformatics.nytrip.databases.model.AudioModel;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by admin on 7/22/15.
@@ -42,22 +40,4 @@ public class AudioDao extends BaseDaoImpl<AudioModel, String> {
         return qb.where().eq("file_path", audioPath).queryForFirst();
     }
 
-    public boolean audioIsExist(AudioModel audio) throws SQLException {
-        QueryBuilder<AudioModel, String> qb = audioDao.queryBuilder();
-        AudioModel audioModel = qb.where().eq(AudioModel.Column.audioId, audio.getAudioId()).queryForFirst();
-               if(audioModel == null){
-                   return false;
-               }
-        return true;
-    }
-
-    public void deleteAudioById(String audioId) throws SQLException {
-        QueryBuilder<AudioModel, String> qb = audioDao.queryBuilder();
-        List<AudioModel> audioList = new ArrayList<>();
-        audioList = qb.where().eq(AudioModel.Column.audioId, audioId).query();
-        for (AudioModel audio :
-                audioList) {
-            deleteAudio(audio);
-        }
-    }
 }

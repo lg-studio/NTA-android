@@ -57,7 +57,7 @@
                 android:paddingTop="30dp"
                 android:clickable="true"
                 android:ellipsize="end"
-                android:text="@string/AGREE"
+                android:text="@android:string/ok"
                 android:textColor="@android:color/black"
                 android:textSize="13dp"
                 app:fontName="roboto-regular.ttf"
@@ -73,7 +73,7 @@
                 android:layout_toLeftOf="@+id/dlg_agree"
                 android:clickable="true"
                 android:ellipsize="end"
-                android:text="@string/DISAGREE"
+                android:text="@android:string/cancel"
                 android:textColor="@color/dlg_disagree"
                 android:textSize="13dp"
                 app:fontName="roboto-regular.ttf"/>

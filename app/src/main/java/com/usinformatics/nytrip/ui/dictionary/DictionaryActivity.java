@@ -31,39 +31,10 @@ public class DictionaryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_dictionary);
         initToolbarEngine(true);
-        mToolbarEngine.setToolbarTitle(getString(R.string.dictionary));
+        mToolbarEngine.setToolbarTitle("Dictionary");
         initSortByAZ();
         initSortByThis();
         initDictionaryList();
-    }
-
-    private void initSortByAZ() {
-        aZTab = ((FrameLayout) findViewById(R.id.first_tab_line));
-        aZText = ((FontTextView) findViewById(R.id.first_tab_text));
-        aZText.setText(getString(R.string.sort_by_az));
-
-        aZText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideThisTab();
-                showAZTab();
-            }
-        });
-    }
-
-    private void initSortByThis() {
-        thisTab = ((FrameLayout) findViewById(R.id.second_tab_line));
-        thisText = ((FontTextView) findViewById(R.id.second_tab_text));
-        thisText.setText(getString(R.string.sort_by_this));
-        thisText.setTextColor(getResources().getColor(R.color.white_54));
-
-        thisText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideAZTab();
-                showThisTab();
-            }
-        });
     }
 
     private void initDictionaryList() {
@@ -79,9 +50,17 @@ public class DictionaryActivity extends BaseActivity {
         list.setAdapter(adapter);
     }
 
-    private void hideAZTab() {
-        aZTab.setVisibility(View.INVISIBLE);
-        aZText.setTextColor(getResources().getColor(R.color.white_54));
+    private void initSortByAZ() {
+        aZTab = ((FrameLayout) findViewById(R.id.sort_by_az_tab));
+        aZText = ((FontTextView) findViewById(R.id.dictionary_sort_by_az));
+
+        aZText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideThisTab();
+                showAZTab();
+            }
+        });
     }
 
     private void hideThisTab() {
@@ -92,6 +71,24 @@ public class DictionaryActivity extends BaseActivity {
     private void showAZTab(){
         aZTab.setVisibility(View.VISIBLE);
         aZText.setTextColor(getResources().getColor(R.color.white));
+    }
+
+    private void initSortByThis() {
+        thisTab = ((FrameLayout) findViewById(R.id.sort_by_this_tab));
+        thisText = ((FontTextView) findViewById(R.id.dictionary_sort_by_this));
+
+        thisText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideAZTab();
+                showThisTab();
+            }
+        });
+    }
+
+    private void hideAZTab() {
+        aZTab.setVisibility(View.INVISIBLE);
+        aZText.setTextColor(getResources().getColor(R.color.white_54));
     }
 
     private void showThisTab() {
@@ -121,8 +118,7 @@ public class DictionaryActivity extends BaseActivity {
 
     @Override
     public void actionToolbarCallback(ToolbarActions currentItem) {
-        if(currentItem==ToolbarActions.BACK)
-            onBackPressed();
+
     }
 
     @Override

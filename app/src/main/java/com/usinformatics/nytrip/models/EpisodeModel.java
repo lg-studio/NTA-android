@@ -1,17 +1,13 @@
 package com.usinformatics.nytrip.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.usinformatics.nytrip.network.Api;
 
 import java.util.Arrays;
-import java.util.Locale;
 
 /**
  * Created by D1m11n on 30.06.2015.
  */
 public class EpisodeModel {
-
-    public String courseID;
 
     @SerializedName("id")
     public String episodeID;
@@ -20,13 +16,12 @@ public class EpisodeModel {
 
     public String desc;
 
+    @SerializedName("scenes")
     public SceneModel [] scenes;
+//
+//    @SerializedName("scenes")
+//    public String [] scenes;
 
-    public String imageUrl;
-    public String getImageUrl(){
-
-        return String.format(Locale.ENGLISH, Api.URI_EPISODE_IMAGE, episodeID);
-    }
 
     @Override
     public String toString() {

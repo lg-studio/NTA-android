@@ -19,10 +19,6 @@ public interface AppConsts {
 
     long SPEECH_MAX_TIMEms = 5000L;
 
-    int MAX_RECORD_DURATIONs=15;
-
-    int MIN_MARK_SHOW_DIALOG=50;
-
 
     String BROADCAST_NOTIFICATION = "intent_notification";
 
@@ -35,6 +31,4 @@ public interface AppConsts {
     String PROJECT_ID = "projectNumber";
 
     String APP_DIRECTORY_PATH= Environment.getExternalStorageDirectory().getPath()+ "/NYtrip";
-
-    String GOODBYE = "Goodbye";
 }

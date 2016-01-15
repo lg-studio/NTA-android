@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import com.usinformatics.nytrip.AppConsts;
+import com.usinformatics.nytrip.FakeData;
 import com.usinformatics.nytrip.R;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class PopupWindowBuilder {
     private final Context context;
     private static ItemRawPopup mCurrentPopup;
     private static PopupWindowBuilder mBuilder;
-    //private ArrayList<ItemRawPopup> list= FakeData.getPopupWindowAkaSettingsData();
+    private ArrayList<ItemRawPopup> list= FakeData.getPopupWindowAkaSettingsData();
 
     private PopupWindowBuilder(final Activity activity){
         //registerNotificationBroadcastReceiver(activity);
@@ -52,23 +53,21 @@ public class PopupWindowBuilder {
     }
 
     public void setCurrentPopup(ItemRawPopup popup){
-        Log.e(TAG,"set current popup is " + popup);
         mCurrentPopup=popup;
     }
 
    //https://www.codeofaninja.com/2013/04/show-listview-as-drop-down-android.html
     private PopupWindowBuilder getWindowFor( final OnItemPopupClick callback){
-        Log.e(TAG,"current popup is " + mCurrentPopup);
         if(popupWindow!=null) return this;
         View view =((LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.popup_window, null, false);
         ListView listView = (ListView) view.findViewById(R.id.listView);
-        mAdapter= new PopupListAdapter(context,getListWithout(mCurrentPopup));
+        mAdapter= new PopupListAdapter(context,list);
         listView.setAdapter(mAdapter);
-        popupWindow = new PopupWindow(view,(int) ScreenUtils.dpToPixels(context, WIDTH),WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow = new PopupWindow(view,(int) ScreenUtils.dpToPixels(context, WIDTH),WindowManager.LayoutParams.WRAP_CONTENT, false);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                onItemClickHandler(parent,position,callback);
+              onItemClickHandler(parent,position,callback);
             }
         });
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -155,25 +154,5 @@ public class PopupWindowBuilder {
     public void release(){
         //unregisterNotificationBroadcastReceiver(context);
         popupWindow=null;
-    }
-
-    private ArrayList<ItemRawPopup> getList(){
-        ArrayList<ItemRawPopup> list = new ArrayList<>();
-        for (int i=0; i< ItemRawPopup.values().length; i++){
-            list.add(ItemRawPopup.values()[i]);
-        }
-        return list;
-    }
-
-    private ArrayList<ItemRawPopup> getListWithout(ItemRawPopup popup){
-        if(popup==null)
-            return getList();
-        ArrayList<ItemRawPopup> list = new ArrayList<>();
-        for (int i=0; i< ItemRawPopup.values().length; i++){
-            if(ItemRawPopup.values()[i].getModel()==popup.getModel())
-                continue;
-            list.add(ItemRawPopup.values()[i]);
-        }
-        return list;
     }
 }

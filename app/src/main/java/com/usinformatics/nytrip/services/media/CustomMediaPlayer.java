@@ -12,7 +12,6 @@ public class CustomMediaPlayer {
 
 
     private MediaPlayer mMediaPlayer = new MediaPlayer();
-    private boolean playing;
 
 
     /**
@@ -110,7 +109,4 @@ public class CustomMediaPlayer {
         mMediaPlayer.release();
     }
 
-    public boolean isPlaying() {
-        return mMediaPlayer!=null?mMediaPlayer.isPlaying():false;
-    }
 }

@@ -12,12 +12,6 @@ import retrofit.client.Response;
 public class NetworkUtils {
 
     public static String getResponseBody(Response result) {
-        if(result==null){
-            return null;
-        }
-        if(result.getBody()==null){
-            return null;
-        }
         BufferedReader reader = null;
         StringBuilder sb = new StringBuilder();
         try {

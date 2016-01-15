@@ -1,7 +1,6 @@
 package com.usinformatics.nytrip.network.gcm;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -50,8 +49,11 @@ public class InitGCMService extends IntentService {
         if (!isGCMInstanceIdExist()) {
             saveProjectId(projectId);
 
-                SendInstanceId sendInstanceId = new SendInstanceId(this);
-                sendInstanceId.start();
+            try {
+                generateAndSendInstanceId();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -67,46 +69,28 @@ public class InitGCMService extends IntentService {
         StorageFactory.getAppStorage(this).saveProjectId(projectId);
     }
 
+    private void generateAndSendInstanceId() throws IOException {
+        InstanceID instanceID = InstanceID.getInstance(this);
+        instanceID.deleteInstanceID();
+        String token = instanceID.getToken(getAuthorizedId(),
+                GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+        StorageFactory.getAppStorage(this).saveInstanceId(token);
+
+        sendInstanceId(token);
+    }
+
+    private void sendInstanceId(String token) {
+        RequestExecutor.getInstance(this).sendGCMToken(token, new OnServerResponseCallback<Object>() {
+            @Override
+            public void onResponse(Object programId, Response responseBody, RetrofitError error) {
+                if (programId != null) {
+                }
+            }
+        });
+    }
+
     public String getAuthorizedId() {
         SecurePreferences preferences = new SecurePreferences(this);
         return preferences.getString(AppConsts.PROJECT_ID, "");
-    }
-
-    private class SendInstanceId extends Thread{
-
-        private Context context;
-
-        public SendInstanceId(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void run() {
-            try {
-                generateAndSendInstanceId();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        private void generateAndSendInstanceId() throws IOException {
-            InstanceID instanceID = InstanceID.getInstance(context);
-            instanceID.deleteInstanceID();
-            String token = instanceID.getToken(getAuthorizedId(),
-                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-            StorageFactory.getAppStorage(context).saveInstanceId(token);
-
-            sendInstanceId(token);
-        }
-
-        private void sendInstanceId(String token) {
-            RequestExecutor.getInstance(context).sendGCMToken(token, new OnServerResponseCallback<Object>() {
-                @Override
-                public void onResponse(Object programId, Response responseBody, RetrofitError error) {
-                    if (programId != null) {
-                    }
-                }
-            });
-        }
     }
 }

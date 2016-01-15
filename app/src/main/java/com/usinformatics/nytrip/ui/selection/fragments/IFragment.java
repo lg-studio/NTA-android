@@ -8,7 +8,7 @@ import android.app.Fragment;
 public interface IFragment {
 
     public enum Type{
-        EPISODES, TASKS, MAP, REFRESH;
+        EPISODES, TASKS, MAP;
     }
 
     public Type getFragmentType();

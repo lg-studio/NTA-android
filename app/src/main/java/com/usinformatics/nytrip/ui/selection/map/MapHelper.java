@@ -1,13 +1,12 @@
 package com.usinformatics.nytrip.ui.selection.map;
 
+import android.app.Activity;
+
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.usinformatics.nytrip.ui.selection.TasksSelectionActivity;
+import com.usinformatics.nytrip.ui.selection.map.clusters.ClusterMapDecorator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import common.utis.ListsUtils;
 
@@ -17,47 +16,32 @@ import common.utis.ListsUtils;
 public class MapHelper {
 
 
-    //private ClusterMapDecorator mMapDecorator;
+    private ClusterMapDecorator mMapDecorator;
     private GoogleMap mGoogleMap;
-    private ArrayList<TaskMarkerModel> mTaskMarkersList;
-    private HashMap<Marker, String> mMarkers= new HashMap<>();
-    private TasksSelectionActivity mActivity;
-    private String mCentralMarkerId;
+    private ArrayList<TaskMarkerModel> mMarkersList;
+    private Activity mActivity;
 
 
-    public static MapHelper instantWithSettings(TasksSelectionActivity  activity, GoogleMap map) {
+    public static MapHelper instantWithSettings(Activity activity, GoogleMap map) {
         MapHelper helper = new MapHelper();
         helper.mGoogleMap = map;
         helper.mActivity = activity;
         helper.setDefaultSettings();
-        helper.fillMap();
+        helper.prepareCluster();
         return helper;
     }
 
-    private void fillMap() {
-        //mMapDecorator = new ClusterMapDecorator(mActivity, mGoogleMap);
-        //mGoogleMap.setOnCameraChangeListener(mMapDecorator);
-//        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//            @Override
-//            public boolean onMarkerClick(Marker marker) {
-//                MapMarkerClicker.displayInfo(marker);
-//                //marker.showInfoWindow();
-//                return false;
-//            }
-//        });
-        mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                    mActivity.displayScenesTasks(mMarkers.get(marker));
-            }
-        });
+    private void prepareCluster() {
+        mMapDecorator = new ClusterMapDecorator(mActivity, mGoogleMap);
+        mGoogleMap.setOnCameraChangeListener(mMapDecorator);
+        mGoogleMap.setOnMarkerClickListener(mMapDecorator);
         setCustomRendererAndAlgorithm();
     }
 
 
     //TODO SET CLUSTERERS
     private void setCustomRendererAndAlgorithm() {
-        //mMapDecorator.setRenderer(new );
+
     }
 
     private void setDefaultSettings() {
@@ -65,15 +49,10 @@ public class MapHelper {
     }
 
 
-    public void setMarkers(ArrayList<TaskMarkerModel> list, String centralMarkerId) {
-        //mMapDecorator.setMarkers(list);
+    public void setMarkers(ArrayList<TaskMarkerModel> list, int centralMarkerId) {
+        mMapDecorator.setMarkers(list);
         addMarkersToMap(list);
-        mTaskMarkersList = list;
-        mCentralMarkerId=centralMarkerId;
-    }
-
-    public void setMarkers(ArrayList<TaskMarkerModel> list) {
-        setMarkers(list, null);
+        mMarkersList = list; //TODO ME BE DELETE
     }
 
     private void addMarkersToMap(ArrayList<TaskMarkerModel> list) {
@@ -82,22 +61,14 @@ public class MapHelper {
         int size =list.size();
         for (int i=0; i<size; i++)
             addItemMarker(list.get(i));
-        //mMapDecorator.setMapMarkersTasks(mMarkers);
-
     }
 
     private void addItemMarker(TaskMarkerModel taskMarkerModel) {
-        Marker m=mGoogleMap.addMarker(generateFor(taskMarkerModel));
-        mMarkers.put(m,taskMarkerModel.taskId);
-        //m.showInfoWindow();
+        mGoogleMap.addMarker(generateFor(taskMarkerModel));
     }
 
     private MarkerOptions generateFor(TaskMarkerModel taskMarkerModel){
-        return new MarkerOptions().
-                position(taskMarkerModel.getLatLng()).
-                title("Name: " + taskMarkerModel.title).
-               // snippet("SNIPPET =" + taskMarkerModel.snippet).
-                icon(BitmapDescriptorFactory.fromResource(taskMarkerModel.idIcon));
+        return new MarkerOptions().position(taskMarkerModel.getLatLng()).snippet(taskMarkerModel.snippet).title(taskMarkerModel.title);
     }
 
 

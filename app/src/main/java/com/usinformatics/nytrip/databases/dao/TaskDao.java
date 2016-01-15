@@ -2,6 +2,8 @@ package com.usinformatics.nytrip.databases.dao;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.DatabaseTable;
+import com.usinformatics.nytrip.databases.model.EpisodeDBModel;
 import com.usinformatics.nytrip.databases.model.TaskDbModel;
 
 import java.sql.SQLException;

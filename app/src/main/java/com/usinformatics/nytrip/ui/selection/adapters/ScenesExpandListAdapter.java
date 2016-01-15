@@ -2,7 +2,6 @@ package com.usinformatics.nytrip.ui.selection.adapters;
 
 import android.app.Activity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import common.utis.ListsUtils;
 public class ScenesExpandListAdapter extends BaseExpandableListAdapter {
 
 
-    private static final String TAG = ScenesExpandListAdapter.class.getSimpleName();
     private EpisodesScenesListModel mExpModel;
     private Activity mActivity;
     private LayoutInflater inflater;
@@ -82,7 +80,7 @@ public class ScenesExpandListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.item_grouplist_scenes, null, false);
             viewHolder = new GroupHolder();
             viewHolder.title = (TextView) convertView.findViewById(R.id.tv_item_grouplist);
-             viewHolder.icon = (ImageView) convertView.findViewById(R.id.iv_item_grouplist);
+            viewHolder.icon = (ImageView) convertView.findViewById(R.id.iv_item_grouplist);
             viewHolder.subTitle=(TextView)convertView.findViewById(R.id.tv_item_groupsublist);
             viewHolder.dividerBottom=convertView.findViewById(R.id.divider_bottom_item_grouplist);
             convertView.setTag(viewHolder);
@@ -98,8 +96,7 @@ public class ScenesExpandListAdapter extends BaseExpandableListAdapter {
         viewHolder.title.setText(String.valueOf(mm.name));
         //viewHolder.subTitle.setText(mm.subTitle);
         viewHolder.subTitle.setText("Episode");
-        Log.e(TAG, "EPISODE IMAGE +  " + mm.getImageUrl());
-        Picasso.with(mActivity).load(mm.getImageUrl()).error(R.mipmap.ic_fake_taxi).placeholder(R.mipmap.ic_fake_taxi).transform(new CircleTransform()).into(viewHolder.icon);
+        Picasso.with(mActivity).load(R.mipmap.ic_fake_taxi).transform(new CircleTransform()).into(viewHolder.icon);
         return convertView;
     }
 

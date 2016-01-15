@@ -6,8 +6,6 @@ package com.usinformatics.nytrip.ui.excercises.items;
 public enum ChatItemType {
 
     NPC_QUESTION,
-    STUDENT_MESSAGE,
-    IN_PROGRESS,
-    VOICE_MESSAGE,
-    TEACHER_MESSAGE
+        STUDENT_MASSAGE,
+        IN_PROGRESS
 }

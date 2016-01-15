@@ -1,0 +1,12 @@
+apply plugin: 'java'
+
+compileJava {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+
+dependencies {
+    def versions = rootProject.ext.libraryVersions
+
+    compile "io.reactivex:rxjava:${versions.rxJava}"
+}

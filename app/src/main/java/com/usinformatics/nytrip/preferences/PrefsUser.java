@@ -50,7 +50,7 @@ public class PrefsUser implements UserDataStorage {
     public void saveUser(UserModel user) {
         mEditor.putString(Key.FIRST_NAME, user.firstName).
                 putString(Key.TOKEN, user.token).
-                putString(Key.GROUP, generateFromArray(user.getClasses())). //TODO SOMETIMES NULL
+                putString(Key.GROUP, generateFromArray(user.getClasses())).
                 putString(Key.LAST_NAME, user.lastName).
                 putString(Key.TEACHER_CODE, user.teacherCode).
                 putString(Key.EMAIL, user.email).
@@ -64,7 +64,7 @@ public class PrefsUser implements UserDataStorage {
         UserModel user= new UserModel();
         user.firstName=mPrefs.getString(Key.FIRST_NAME,"");
         user.token=mPrefs.getString(Key.TOKEN,"");
-        user.setClasses(generateFromString(mPrefs.getString(Key.GROUP, ""))); //TODO SOMETIMES NULL
+        user.setClasses(generateFromString(mPrefs.getString(Key.GROUP, "")));
         user.teacherCode=mPrefs.getString(Key.TEACHER_CODE,"");
         user.email=mPrefs.getString(Key.EMAIL,"");
         user.lastName=mPrefs.getString(Key.LAST_NAME,"");
@@ -98,11 +98,6 @@ public class PrefsUser implements UserDataStorage {
 
     @Override
     public void setCurrentScene(SceneModel model) {
-        if(model==null){
-            mEditor.putString(Key.SCENE_ID, null)
-                    .putString(Key.SCENE_NAME, null).commit();
-            return;
-        }
         mEditor.putString(Key.SCENE_ID, model.sceneID).putString(Key.SCENE_NAME, model.name).commit();
     }
 
@@ -116,11 +111,6 @@ public class PrefsUser implements UserDataStorage {
 
     @Override
     public void setCurrentEpisode(EpisodeModel model) {
-        if(model==null){
-            mEditor.putString(Key.EPISODE_ID, null)
-                    .putString(Key.EPISODE_NAME, null).commit();
-            return;
-        }
         mEditor.putString(Key.EPISODE_ID, model.episodeID)
                 .putString(Key.EPISODE_NAME, model.name).commit();
     }
@@ -145,8 +135,6 @@ public class PrefsUser implements UserDataStorage {
 
     @Override
     public void setCurrentTaskPath(String taskPath) {
-
-        taskPath = taskPath.replaceAll("[-+.^:, ]","_");
         mEditor.putString(Key.CURRENT_TUSK, taskPath).commit();
     }
 
@@ -192,7 +180,7 @@ public class PrefsUser implements UserDataStorage {
 
     private static String generateFromArray(String [] array){
         if(ListsUtils.isEmpty(array)) return "";
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         for (String string : array) {
             if (builder.length() > 0) {
                 builder.append(SEPARATOR);

@@ -1,1 +1,1 @@
-include ':app', ':secure_preferences', ':expandapleList'
+include ':domain', ':repository', ':app', ':secure_preferences', ':expandapleList'

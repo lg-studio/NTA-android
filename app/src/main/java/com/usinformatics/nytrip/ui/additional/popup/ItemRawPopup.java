@@ -5,13 +5,12 @@ package com.usinformatics.nytrip.ui.additional.popup;
  */
 public enum ItemRawPopup {
 
-    MAIN(new ItemPopupModel(0, "Episodes/Scenes", "", null)),
     PROFILE(new ItemPopupModel(0, "Profile", "", null)),
     NOTIFICATIONS(new ItemPopupModel(0, "Notifications", "8", null)),
     USER_ACTIVITY(new ItemPopupModel(0, "User Activity", "", null)),
     DICTIONARY(new ItemPopupModel(0, "Dictionary", "", null)),
     SETTINGS(new ItemPopupModel(0, "Settings", "", null)),
-    COURSE_SELECTION(new ItemPopupModel(0, "Course Selection", "", null)),
+    SEMESTER_SELECTION(new ItemPopupModel(0, "Semester Selection", "", null)),
     LOGOUT(new ItemPopupModel(0, "Logout", "", null));
 
     private ItemPopupModel mModel;

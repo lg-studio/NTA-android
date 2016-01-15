@@ -11,7 +11,7 @@ import com.usinformatics.nytrip.preferences.PrefsUser;
  */
 public class StorageFactory {
 
-    public static UserDataStorage getUserStorage(Context context){
+    public static UserDataStorage getUserStorage(Context context) {
         return PrefsUser.getInstance(context);
     }
 

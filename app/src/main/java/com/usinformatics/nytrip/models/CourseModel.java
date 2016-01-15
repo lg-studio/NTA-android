@@ -16,9 +16,6 @@ public class CourseModel {
 
     public String desc;
 
-    @SerializedName("episodes")
-    public String [] episodeIDs;
-
 
     public String getName(){
         return name;
@@ -28,15 +25,20 @@ public class CourseModel {
         this.name=name;
     }
 
+    @SerializedName("current")
+    public boolean isCurrent;
 
+    @SerializedName("episodes")
+    public String [] episodeIDs;
 
 
     @Override
     public String toString() {
         return "CourseModel{" +
-                "id='" + id + '\'' +
+                "uuid='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
+                ", isCurrent=" + isCurrent +
                 ", episodeIDs=" + Arrays.toString(episodeIDs) +
                 '}';
     }

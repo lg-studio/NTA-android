@@ -91,7 +91,7 @@ public class VoiceRecognitionService extends RecognitionService {
 
     @Override
     public void onStartListening(Intent i, Callback listener) {
-        Log.e("SimpleVoiceService", "started listening");
+        Log.e("SimpleVoiceService", "onStart listening");
 //        Intent intent= new Intent();
 ////        if (!TextUtils.isEmpty(lang))
 ////            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang);

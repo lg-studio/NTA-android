@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 import com.usinformatics.nytrip.IntentConsts;
 import com.usinformatics.nytrip.R;
-import com.usinformatics.nytrip.models.TaskModel;
-import com.usinformatics.nytrip.models.types.ChatType;
+import com.usinformatics.nytrip.models.ChatModel;
 import com.usinformatics.nytrip.ui.excercises.ExcerciseActivity;
 import com.usinformatics.nytrip.ui.selection.TasksSelectionActivity;
 
@@ -22,7 +21,7 @@ import com.usinformatics.nytrip.ui.selection.TasksSelectionActivity;
  */
 public class ChatResultFragment extends Fragment implements View.OnClickListener {
 
-    private TaskModel mTask;
+    private ChatModel.ChatType mCharType;
     private float mMark;
 
     private View mRootView;
@@ -30,9 +29,9 @@ public class ChatResultFragment extends Fragment implements View.OnClickListener
 
 
 
-    public static ChatResultFragment newInstance(TaskModel task, float mark){
+    public static ChatResultFragment newInstance(ChatModel.ChatType type, float mark){
         ChatResultFragment fr= new ChatResultFragment();
-        fr.mTask =task;
+        fr.mCharType=type;
         fr.mMark =mark;
         return fr;
     }
@@ -60,8 +59,7 @@ public class ChatResultFragment extends Fragment implements View.OnClickListener
     }
 
     private void setMark() {
-        mTextMark.setText(getTextMark((int)(mMark*100)));
-        if(mTask.chatType== ChatType.RECOGNITION){
+        if(mCharType== ChatModel.ChatType.RECOGNITION){
             mSendToTeacher.setVisibility(View.GONE);
             mPercentMark.setVisibility(View.VISIBLE);
             mPercentMark.setText(calculateResultInPercents());
@@ -92,7 +90,7 @@ public class ChatResultFragment extends Fragment implements View.OnClickListener
     }
 
     private void tryTaskAgain() {
-        ((ExcerciseActivity)getActivity()).displayChatInfo();
+        ((ExcerciseActivity)getActivity()).displayEcerciseinfo();
     }
 
     private void backToScene() {
@@ -103,26 +101,10 @@ public class ChatResultFragment extends Fragment implements View.OnClickListener
     }
 
     private void nextTask() {
-        Intent intent= new Intent(getActivity(), TasksSelectionActivity.class);
-        getActivity().startActivity(intent);
-        getActivity().finish();
+
     }
 
     private void sendToTeacher() {
 
-    }
-
-    private String getTextMark(int markInPercent){
-        if(markInPercent<20)
-            return getActivity().getString(R.string.Insufficient);
-        if(markInPercent<60)
-            return getActivity().getString(R.string.Low);
-        if(markInPercent<70)
-            return getActivity().getString(R.string.Okay);
-        if(markInPercent<80)
-            return getActivity().getString(R.string.Fairly_good);
-        if(markInPercent<90)
-            return getActivity().getString(R.string.Good);
-        return getActivity().getString(R.string.Excellent);
     }
 }

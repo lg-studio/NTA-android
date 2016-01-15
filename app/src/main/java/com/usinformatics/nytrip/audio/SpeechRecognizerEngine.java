@@ -5,15 +5,19 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.usinformatics.nytrip.AppConsts;
-import com.usinformatics.nytrip.audio.callbacks.OnGetTextCallback;
 import com.usinformatics.nytrip.helpers.FileHelper;
+import com.usinformatics.nytrip.audio.callbacks.OnGetTextCallback;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**

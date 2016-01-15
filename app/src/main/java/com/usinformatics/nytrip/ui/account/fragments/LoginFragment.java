@@ -12,11 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.usinformatics.nytrip.AppConsts;
 import com.usinformatics.nytrip.BaseFragment;
 import com.usinformatics.nytrip.DevConsts;
 import com.usinformatics.nytrip.R;
 import com.usinformatics.nytrip.models.UserModel;
-import com.usinformatics.nytrip.storages.StorageFactory;
 import com.usinformatics.nytrip.ui.account.AccountPresenter;
 import com.usinformatics.nytrip.ui.account.activities.AccountActivity;
 import com.usinformatics.nytrip.ui.account.model.AccountType;
@@ -67,12 +67,12 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void initViews() {
+
         if (DevConsts.IS_FAKE_USER) {
             metEmail.setText(DevConsts.FAKE_USER_EMAIL);
             metPassword.setText(DevConsts.FAKE_USERPASS);
-        }else{
-            metEmail.setText(StorageFactory.getUserStorage(mActivity).getLastUsedEmail());
         }
+
         initLoginBtn();
         initForgotPasswordBtn();
         initRegistrationBtn();
@@ -131,6 +131,11 @@ public class LoginFragment extends BaseFragment {
         if (TextUtils.isEmpty(metPassword.getText())) {
             Log.e(TAG, "Password is empty");
             mActivity.setUsernameError("Password password is empty");
+            return false;
+        }
+        if (metPassword.getText().length() < AppConsts.MIN_PASS_LENGTH) {
+            Log.e(TAG, "Password is empty");
+            mActivity.setUsernameError("Password is too short ( required min 6 symbols )");
             return false;
         }
         return true;

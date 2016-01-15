@@ -19,33 +19,33 @@ public class ChatAdapter extends ArrayAdapter<ChatItemList> {
     protected static LayoutInflater mInflater;
     private ArrayList<ChatItemList> mList;
 
-    public ChatAdapter(Context context, ArrayList<ChatItemList> list) {
-        super(context, 0, list);
+    public ChatAdapter( Context context, ArrayList<ChatItemList> list){
+        super( context, 0, list);
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mList = list;
     }
 
-    public void addItem(ChatItemList item) {
+    public void addItem(ChatItemList item){
         this.add(item);
         notifyDataSetChanged();
     }
 
     @Override
     public ChatItemList getItem(int position) {
-        return mList.get(getItemViewType(position));
+           return mList.get(getItemViewType(position));
     }
 
     @Override
     public int getCount() {
-        int size = 0;
-        for (int i = 0; i < mList.size(); i++)
-            size += mList.get(i).getCount();
+        int size=0;
+        for(int i=0; i<mList.size(); i++)
+            size+=mList.get(i).getCount();
         return size;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position % 2 == 0)
+        if(position%2==0)
             return 0;
         else
             return 1;
@@ -58,6 +58,6 @@ public class ChatAdapter extends ArrayAdapter<ChatItemList> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return getItem(position).getView(mInflater, position / 2, convertView);
+        return getItem(position).getView(mInflater, position/2, convertView);
     }
 }

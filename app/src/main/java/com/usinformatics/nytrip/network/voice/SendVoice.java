@@ -1,13 +1,10 @@
 package com.usinformatics.nytrip.network.voice;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 
 import com.usinformatics.nytrip.audio.recorder.VoiceRecorder;
 import com.usinformatics.nytrip.audio.recorder.VoiceRecorderCallback;
-import com.usinformatics.nytrip.databases.AudioDbManager;
-import com.usinformatics.nytrip.databases.model.AudioModel;
 import com.usinformatics.nytrip.network.OnServerResponseCallback;
 import com.usinformatics.nytrip.network.RequestExecutor;
 import com.usinformatics.nytrip.preferences.PrefsUser;
@@ -15,7 +12,6 @@ import com.usinformatics.nytrip.preferences.PrefsUser;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import retrofit.RetrofitError;
@@ -43,12 +39,11 @@ public class SendVoice {
         voiceRecorder.stopAndSave();
     }
 
-    public void startRecording(AudioModel audio) {
-        generateFilePath(audio);
+    public void startRecording() {
+        generateFilePath();
 
         try {
             file.createNewFile();
-
             voiceRecorder.start(file, new VoiceRecorderCallback() {
                 @Override
                 public void onStart() {
@@ -72,20 +67,11 @@ public class SendVoice {
         }
     }
 
-    private void generateFilePath(AudioModel audio) {
-        String filePath = Environment.getExternalStorageDirectory()+ "/NYTrip/"+  audio.getAudioId()+ AUDIO_FORMAT;
-        file = new File(Environment.getExternalStorageDirectory()+ "/NYTrip");
-
+    private void generateFilePath() {
+        file = new File(PrefsUser.getInstance(mContext).getCurrentTaskPath(), mTaskName + AUDIO_FORMAT);
         if (!file.exists()) {
             file.mkdir();
         }
-        file = new File(filePath);
-        audio.setFilePath(filePath);
-        saveAudioToBD(audio);
-    }
-
-    private void saveAudioToBD(AudioModel audio) {
-        AudioDbManager.getInstance(mContext).saveAudio(audio);
     }
 
     private List<File> getListFiles(File parentDir) {

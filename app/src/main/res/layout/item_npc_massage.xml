@@ -7,7 +7,7 @@
     android:background="@color/white"
     >
     
-    <ImageView
+    <common.views.RoundedImageView
         android:id="@+id/npc_image"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -18,14 +18,11 @@
 
     <common.views.FontTextView
         android:id="@+id/npc_name"
-        android:layout_width="48dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:text=""
+        android:text="Clara"
         android:textSize="14dp"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:gravity="center"
         app:fontName="@string/roboto_regular"
         android:layout_below="@+id/npc_image"
         android:textColor="@color/black_57"
